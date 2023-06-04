@@ -63,8 +63,16 @@ const Home = () => {
   return (
     <div>
       <AdsSlider />
-      <ProductsContainer title="Ən çox satılan məhsullar" link={"#"} />
-      <ProductsContainer title="Yeni gələn məhsullar" link={"#"} />
+      <ProductsContainer
+        title="Ən çox satılan məhsullar"
+        link={"#"}
+        order="sort_order"
+      />
+      <ProductsContainer
+        title="Yeni gələn məhsullar"
+        link={"#"}
+        order="created"
+      />
       <div className={style.adsContainer}>
         <Advertisement
           isWhiteBack={true}
@@ -85,7 +93,12 @@ const Home = () => {
           image={iPhoneAirTag}
         />
       </div>
-      <ProductsContainer title="Yeni gələn aksessuarlar" link={"#"} />
+      <ProductsContainer
+        title="Yeni gələn aksessuarlar"
+        link={"#"}
+        order="created"
+        category="accessorise"
+      />
       <div className={style.categories}>
         <Category
           name="Telefon"

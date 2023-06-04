@@ -1,46 +1,50 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Link } from "react-router-dom";
 import style from "./productscontainer.module.css";
 import Card from "../Card";
 import nextIcon from "/next.svg";
-import iPhone12 from "../../assets/images/iphone 12.png";
-import nokiaX10 from "../../assets/images/Nokia X10.png";
-import xiaomiPocoM3 from "../../assets/images/Xiaomi Poco M3.png";
-import realme8Pro6 from "../../assets/images/Realme 8 Pro 6.png";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getSelectedProducts } from "../../store/actions/productThunk";
+import SkeletonCard from "../skeletons/SkeletonCard";
 
-const ProductsContainer = ({ title, link }) => {
+const ProductsContainer = ({ title, link, order, category }) => {
+  const { products } = useSelector((state) => state.product);
+
+  const dispatch = useDispatch();
+
+  const filtered = products?.selectedProducts.filter(
+    (selected) =>
+      selected.order == order &&
+      selected.category == category &&
+      selected.length != 0
+  )[0];
+
+  useEffect(() => {
+    dispatch(getSelectedProducts({ order: order, category: category }));
+  }, []);
   return (
     <div className={style.products}>
       <h4>{title}</h4>
       <div className={style.cards}>
-        <Card
-          onSale="3012"
-          price="2089"
-          name="Apple iPhone 12, 64 GB, Bənövşəyi"
-          image={iPhone12}
-        />
-        <Card
-          price="1360"
-          name="Nokia X10, 64 GB, Deep Green"
-          image={nokiaX10}
-        />
-        <Card
-          onSale="429"
-          price="389"
-          name="Xiaomi Poco M3 4/128Gb Yellow (Global)"
-          image={xiaomiPocoM3}
-        />
-        <Card
-          onSale="699"
-          price="649"
-          name="Realme 8 Pro 6/128Gb Black"
-          image={realme8Pro6}
-        />
-        <Card
-          onSale="699"
-          price="649"
-          name="Realme 8 Pro 6/128Gb Black"
-          image={realme8Pro6}
-        />
+        {filtered != undefined ? (
+          filtered.data?.map((product) => {
+            return (
+              <Card
+                key={product.id}
+                price={product.price.formatted}
+                name={product.name}
+                image={product.image.url}
+              />
+            );
+          })
+        ) : (
+          <>
+            {[...Array(5).keys()].map((i) => {
+              return <SkeletonCard key={i} />;
+            })}
+          </>
+        )}
       </div>
       <Link to={link} className={style.allButton}>
         Hamısına bax <img src={nextIcon} />

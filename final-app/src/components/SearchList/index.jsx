@@ -1,7 +1,12 @@
+import { useEffect } from "react";
 import SearchButton from "../SearchButton";
 import style from "./searchlist.module.css";
 
-const SearhList = ({ isSearching }) => {
+const SearhList = ({ isSearching, search }) => {
+  useEffect(() => {
+    console.log(search);
+  }, [search]);
+
   return (
     <div
       className={`${style.searchList} ${isSearching ? style.searching : ""}`}
