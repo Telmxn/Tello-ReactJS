@@ -43,11 +43,32 @@
   padding: 4px 6px;
   font-size: 14px;
 }
+.searchList .result {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.searchList > a {
+  position: absolute;
+  bottom: -40px;
+  display: inline-block;
+  left: 0;
+  right: 0;
+  line-height: 40px;
+  text-align: center;
+  background-color: var(--main-default);
+  color: white;
+  font-size: 14px;
+}
 @media screen and (min-width: 768px) {
   .searchList {
     margin-left: 0;
     margin-top: 0;
     z-index: 999;
     box-sizing: border-box;
+  }
+  .searchList > a {
+    border-radius: 0 0 8px 8px;
   }
 }

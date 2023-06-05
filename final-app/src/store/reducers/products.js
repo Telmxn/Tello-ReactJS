@@ -1,9 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllProducts, getSelectedProducts } from "../actions/productThunk";
+import {
+  getAllProducts,
+  getSelectedProducts,
+  getSearchedProducts,
+} from "../actions/productThunk";
 
 const initialState = {
   products: {
     selectedProducts: [],
+    searchedProducts: [],
   },
   status: "nothing",
   error: "",
@@ -36,12 +41,22 @@ export const productSlice = createSlice({
       })
       .addCase(getSelectedProducts.rejected, (state, { payload }) => {
         state.status = "error";
-        state.products = {};
+        state.products.selectedProducts = [];
+        state.error = payload;
+      })
+      .addCase(getSearchedProducts.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getSearchedProducts.fulfilled, (state, { payload }) => {
+        state.status = "fulfilled";
+        state.products.searchedProducts = payload;
+      })
+      .addCase(getSearchedProducts.rejected, (state, { payload }) => {
+        state.status = "error";
+        state.products.searchedProducts = [];
         state.error = payload;
       });
   },
 });
-
-// export const {} = productSlice.actions;
 
 export default productSlice.reducer;

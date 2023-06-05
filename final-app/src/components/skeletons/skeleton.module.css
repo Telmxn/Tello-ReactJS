@@ -23,12 +23,22 @@
   height: 0.75rem;
 }
 
+.skeleton.margin0 {
+  margin: 0;
+}
+
 .skeleton.width100 {
   width: 100%;
 }
 
 .skeleton.width50 {
   width: 50%;
+}
+
+.skeleton.customImage {
+  width: 64px;
+  height: 64px;
+  border-radius: 4px;
 }
 
 .skeleton.image {

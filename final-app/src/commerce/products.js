@@ -22,7 +22,7 @@ const fetchSelectedProducts = async ({ order, category }) => {
   }
 };
 
-const searchProducts = async ({ query }) => {
+const fetchSearchedProducts = async ({ query }) => {
   try {
     const { data } = await commerce.products.list({
       query: query,
@@ -34,4 +34,4 @@ const searchProducts = async ({ query }) => {
   }
 };
 
-export { fetchAllProducts, fetchSelectedProducts, searchProducts };
+export { fetchAllProducts, fetchSelectedProducts, fetchSearchedProducts };
