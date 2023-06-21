@@ -9,6 +9,21 @@ const fetchAllProducts = async () => {
   }
 };
 
+const fetchPageProducts = async ({ sortBy, sortOrder, category, page = 1 }) => {
+  try {
+    const { data } = await commerce.products.list({
+      sortBy: sortBy,
+      sortDirection: sortOrder,
+      category_slug: category,
+      limit: 15,
+      page: page,
+    });
+    return data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 const fetchSelectedProducts = async ({ order, category }) => {
   try {
     const { data } = await commerce.products.list({
@@ -34,4 +49,9 @@ const fetchSearchedProducts = async ({ query }) => {
   }
 };
 
-export { fetchAllProducts, fetchSelectedProducts, fetchSearchedProducts };
+export {
+  fetchAllProducts,
+  fetchPageProducts,
+  fetchSelectedProducts,
+  fetchSearchedProducts,
+};

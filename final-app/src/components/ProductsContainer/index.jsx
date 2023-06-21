@@ -23,6 +23,7 @@ const ProductsContainer = ({ title, link, order, category }) => {
   useEffect(() => {
     dispatch(getSelectedProducts({ order: order, category: category }));
   }, []);
+
   return (
     <div className={style.products}>
       <h4>{title}</h4>

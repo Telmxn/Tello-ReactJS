@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   fetchAllProducts,
+  fetchPageProducts,
   fetchSelectedProducts,
   fetchSearchedProducts,
 } from "../../commerce/products";
@@ -10,6 +11,23 @@ export const getAllProducts = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const data = fetchAllProducts();
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue("Error bas verdi");
+    }
+  }
+);
+
+export const getPageProducts = createAsyncThunk(
+  "products/getPageProducts",
+  async ({ sortBy, sortOrder, category, page }, thunkAPI) => {
+    try {
+      const data = await fetchPageProducts({
+        sortBy,
+        sortOrder,
+        category,
+        page,
+      });
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue("Error bas verdi");

@@ -1,11 +1,14 @@
 import style from "./search.module.css";
 import searchIcon from "../../assets/images/search.svg";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addSearchHistory } from "../../store/reducers/searchHistory";
 import closeIcon from "../../assets/images/darkClose.svg";
 import SearchList from "../SearchList";
 import useDebounce from "../../hooks/useDebounce";
 
 const Search = ({ searchRef }) => {
+  const dispatch = useDispatch();
   const [isSearching, setIsSearching] = useState(false);
 
   const [search, setSearch] = useState("");
@@ -22,6 +25,12 @@ const Search = ({ searchRef }) => {
 
   const handleChange = () => {
     setSearch(searchRef.current.value);
+  };
+
+  const handleForm = (e) => {
+    if (e.keyCode === 13) {
+      dispatch(addSearchHistory(searchRef.current.value));
+    }
   };
 
   return (
@@ -45,6 +54,7 @@ const Search = ({ searchRef }) => {
             onFocus={handleSearchFocus}
             onBlur={closeSearch}
             onChange={handleChange}
+            onKeyUp={handleForm}
           />
         </div>
         <button className={style.close} onClick={closeSearch}>

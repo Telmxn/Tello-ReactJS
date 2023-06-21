@@ -58,6 +58,6 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   }
   .products .cards > div:last-child {
-    display: inline-block;
+    display: flex;
   }
 }

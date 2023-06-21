@@ -6,6 +6,10 @@ import MenuItem from "../MenuItem";
 import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getMenuCategories } from "../../store/actions/categoryThunk";
+import LoadingScreen from "../LoadingScreen";
 
 const dropdownList = [
   {
@@ -96,6 +100,18 @@ const Menu = ({ searchRef }) => {
     searchRef.current.focus();
   };
 
+  const { categories, status } = useSelector((state) => state.category);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getMenuCategories());
+  }, []);
+
+  if (status == "loading") {
+    return <LoadingScreen />;
+  }
+
   return (
     <>
       <button
@@ -107,29 +123,34 @@ const Menu = ({ searchRef }) => {
       <div className={`${isOpen ? style.openMenu : ""} ${style.menu}`}>
         <nav>
           <ul>
-            <MenuItem
-              name="Yeni"
-              link="#"
-              style={style}
-              dropdown={dropdownList}
-            />
-            <MenuItem
-              name="Apple"
-              link="#"
-              style={style}
-              dropdown={dropdownList}
-            />
-            <MenuItem name="Samsung" link="#" style={style} />
-            <MenuItem name="Xiaomi" link="#" style={style} />
-            <MenuItem
-              name="Redmi"
-              link="#"
-              style={style}
-              dropdown={dropdownList}
-            />
-            <MenuItem name="Bütün Brendlər" link="#" style={style} />
-            <MenuItem name="Aksessuarlar" link="#" style={style} />
-            <MenuItem name="Endirimlər" link="#" style={style} />
+            {categories?.menuCategories
+              .filter((category) => {
+                return (
+                  category.name != "Telefon" && category.name != "Smart Saat"
+                );
+              })
+              .map((category) => {
+                return category.children.length == 0 ? (
+                  <MenuItem
+                    name={category.name}
+                    link="#"
+                    style={style}
+                    key={category.id}
+                  />
+                ) : (
+                  category.children.map((categoryChildren) => {
+                    return (
+                      <MenuItem
+                        name={categoryChildren.name}
+                        link="#"
+                        style={style}
+                        dropdown={dropdownList}
+                        key={categoryChildren.id}
+                      />
+                    );
+                  })
+                );
+              })}
           </ul>
         </nav>
         <div className={style.phoneMenuHeader}>

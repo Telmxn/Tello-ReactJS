@@ -97,7 +97,7 @@ const Home = () => {
         title="Yeni gələn aksessuarlar"
         link={"#"}
         order="created"
-        category="accessorise"
+        category="accessories"
       />
       <div className={style.categories}>
         <Category
