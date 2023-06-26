@@ -41,17 +41,41 @@ const Products = () => {
     return item;
   });
 
-  filteredProducts = filteredProducts.map((product) => {
-    if (categories.length != 0) {
-      for (let category of categories) {
-        let res = false;
-        product.categories.forEach((pCategory) => {
-          if (pCategory.name == category) {
-            console.log(product);
-            res = true;
+  filteredProducts = filteredProducts
+    .map((product) => {
+      if (categories.length != 0) {
+        for (let category of categories) {
+          let res = false;
+          product.categories.forEach((pCategory) => {
+            if (pCategory.name == category) {
+              console.log(product);
+              res = true;
+              return product;
+            }
+          });
+          if (res) {
             return product;
           }
-        });
+        }
+      } else {
+        return product;
+      }
+    })
+    .filter(Boolean);
+  filteredProducts = filteredProducts.filter(Boolean);
+  filteredProducts = filteredProducts.map((product) => {
+    if (colors.length != 0) {
+      for (let color of colors) {
+        let res = false;
+        product.variant_groups
+          .filter((variant) => variant.name === "Rəng")[0]
+          .options.forEach((pColor) => {
+            if (pColor.name === color) {
+              console.log(product);
+              res = true;
+              return product;
+            }
+          });
         if (res) {
           return product;
         }
@@ -60,28 +84,6 @@ const Products = () => {
       return product;
     }
   });
-
-  // filteredProducts = filteredProducts.map((product) => {
-  //   if (categories.length != 0) {
-  //     console.log(categories.length, "Girdi");
-  //     for (let category of categories) {
-  //       let res = false;
-  //       product.categories.forEach((pCategory) => {
-  //         if (pCategory.name == category) {
-  //           console.log(product);
-  //           res = true;
-  //           return product;
-  //         }
-  //       });
-  //       if (res) {
-  //         return product;
-  //       }
-  //     }
-  //   } else {
-  //     return product;
-  //   }
-  // });
-
   filteredProducts = filteredProducts.filter(Boolean);
   console.log(filteredProducts);
   return (
@@ -137,7 +139,7 @@ const Products = () => {
           })
         ) : (
           <>
-            {[...Array(15).keys()].map((i) => {
+            {[...Array(filteredProducts.length).keys()].map((i) => {
               return <SkeletonCard key={i} />;
             })}
           </>

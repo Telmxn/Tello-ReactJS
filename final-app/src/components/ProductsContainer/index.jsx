@@ -13,7 +13,7 @@ const ProductsContainer = ({ title, link, order, category }) => {
 
   const dispatch = useDispatch();
 
-  const filtered = products?.selectedProducts.filter(
+  const filtered = products?.selectedProducts?.filter(
     (selected) =>
       selected.order == order &&
       selected.category == category &&

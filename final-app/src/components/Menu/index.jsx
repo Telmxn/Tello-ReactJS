@@ -3,94 +3,12 @@ import menuIcon from "../../assets/images/menu.svg";
 import closeIcon from "../../assets/images/close.svg";
 import searchIcon from "../../assets/images/blackSearch.svg";
 import MenuItem from "../MenuItem";
-import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMenuCategories } from "../../store/actions/categoryThunk";
 import LoadingScreen from "../LoadingScreen";
-
-const dropdownList = [
-  {
-    id: 1,
-    name: "Başlıq",
-    dropdown: [
-      {
-        id: uuidv4(),
-        name: "Alt Başlıq",
-        link: "#",
-      },
-      {
-        id: uuidv4(),
-        name: "Alt Başlıq",
-        link: "#",
-      },
-      {
-        id: uuidv4(),
-        name: "Alt Başlıq",
-        link: "#",
-      },
-      {
-        id: uuidv4(),
-        name: "Alt Başlıq",
-        link: "#",
-      },
-      {
-        id: uuidv4(),
-        name: "Alt Başlıq",
-        link: "#",
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "Başlıq",
-    dropdown: [
-      {
-        id: uuidv4(),
-        name: "Alt Başlıq",
-        link: "#",
-      },
-      {
-        id: uuidv4(),
-        name: "Alt Başlıq",
-        link: "#",
-      },
-      {
-        id: uuidv4(),
-        name: "Alt Başlıq",
-        link: "#",
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: "Başlıq",
-    dropdown: [
-      {
-        id: uuidv4(),
-        name: "Alt Başlıq",
-        link: "#",
-      },
-      {
-        id: uuidv4(),
-        name: "Alt Başlıq",
-        link: "#",
-      },
-      {
-        id: uuidv4(),
-        name: "Alt Başlıq",
-        link: "#",
-      },
-      {
-        id: uuidv4(),
-        name: "Alt Başlıq",
-        link: "#",
-      },
-    ],
-  },
-];
 
 const Menu = ({ searchRef }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -124,7 +42,7 @@ const Menu = ({ searchRef }) => {
         <nav>
           <ul>
             {categories?.menuCategories
-              .filter((category) => {
+              ?.filter((category) => {
                 return (
                   category.name != "Telefonlar" && category.name != "Smart Saat"
                 );

@@ -1,3 +1,5 @@
-import Commerce from "@chec/commerce.js";
+import axios from "axios";
 
-export const commerce = new Commerce(import.meta.env.VITE_CHEC_PUBLIC_KEY);
+export const instance = axios.create({
+  baseURL: "https://api.chec.io/v1/",
+});
