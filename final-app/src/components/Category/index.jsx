@@ -1,21 +1,44 @@
 import { Link } from "react-router-dom";
 import style from "./category.module.css";
 import arrowRight from "../../assets/images/arrowRight.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getMenuCategories } from "../../store/actions/categoryThunk";
 
-const Category = ({ isFull, name, count, image, link, background }) => {
+const Category = ({ isFull, name, link, background }) => {
+  const { categories } = useSelector((state) => state.category);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getMenuCategories());
+  }, []);
+
+  const filtered = categories?.menuCategories.filter(
+    (category) => category.name == name
+  )[0];
+
+  console.log(filtered);
+
   return (
     <div
       className={`${isFull ? style.fullCategory : ""} ${style.category}`}
       style={{ backgroundImage: background }}
     >
-      <div className={style.info}>
-        <h3>{name}</h3>
-        <p>Məhsul sayı: {count}</p>
-        <Link to={link}>
-          Məhsullara keçid <img src={arrowRight} alt="Right Arrow" />
-        </Link>
-      </div>
-      <img src={image} alt="Category" />
+      {filtered != undefined ? (
+        <>
+          <div className={style.info}>
+            <h3>{filtered.name}</h3>
+            <p>Məhsul sayı: {filtered.products}</p>
+            <Link to={link}>
+              Məhsullara keçid <img src={arrowRight} alt="Right Arrow" />
+            </Link>
+          </div>
+          <img src={filtered.assets[0].url} alt="Category" />
+        </>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

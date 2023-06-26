@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid var(--basic-300);
 }
 .filtering .divider {
   width: 1px;
@@ -21,4 +22,17 @@
   background: none;
   border: none;
   outline: none;
+}
+@media screen and (min-width: 768px) {
+  .filtering {
+    position: absolute;
+    width: 100%;
+    border-bottom: none;
+  }
+  .filtering > div > button {
+    display: none;
+  }
+  .filtering .divider {
+    display: none;
+  }
 }

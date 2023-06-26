@@ -101,24 +101,18 @@ const Home = () => {
       />
       <div className={style.categories}>
         <Category
-          name="Telefon"
+          name="Telefonlar"
           isFull
-          count="322"
-          image={telephoneC}
           link={"#"}
           background={`url(${phoneback})`}
         />
         <Category
           name="Smart Saat"
-          count="46"
-          image={watchC}
           link={"#"}
           background={`url(${watchback})`}
         />
         <Category
-          name="Aksesuar"
-          count="891"
-          image={accesoriseC}
+          name="Aksesuarlar"
           link={"#"}
           background={`url(${watchback})`}
         />

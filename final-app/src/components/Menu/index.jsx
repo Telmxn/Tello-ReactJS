@@ -126,7 +126,7 @@ const Menu = ({ searchRef }) => {
             {categories?.menuCategories
               .filter((category) => {
                 return (
-                  category.name != "Telefon" && category.name != "Smart Saat"
+                  category.name != "Telefonlar" && category.name != "Smart Saat"
                 );
               })
               .map((category) => {
@@ -144,7 +144,7 @@ const Menu = ({ searchRef }) => {
                         name={categoryChildren.name}
                         link="#"
                         style={style}
-                        dropdown={dropdownList}
+                        dropdownCategory={categoryChildren.slug}
                         key={categoryChildren.id}
                       />
                     );

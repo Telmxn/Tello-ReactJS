@@ -1,22 +1,22 @@
 import { commerce } from ".";
 
-const fetchAllProducts = async () => {
+const fetchAllProducts = async ({ page = 1 }) => {
   try {
-    const { data } = await commerce.products.list();
+    const { data } = await commerce.products.list({
+      limit: 15,
+      page: page,
+    });
     return data;
   } catch (error) {
     throw new Error(error);
   }
 };
 
-const fetchPageProducts = async ({ sortBy, sortOrder, category, page = 1 }) => {
+const fetchPageProducts = async ({ sortBy, sortOrder }) => {
   try {
     const { data } = await commerce.products.list({
       sortBy: sortBy,
       sortDirection: sortOrder,
-      category_slug: category,
-      limit: 15,
-      page: page,
     });
     return data;
   } catch (error) {

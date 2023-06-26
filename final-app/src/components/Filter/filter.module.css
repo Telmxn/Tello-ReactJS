@@ -262,11 +262,24 @@
     display: none;
   }
   .menu {
-    order: 4;
     width: 100%;
     position: unset;
     overflow: unset;
+    position: relative;
+    top: 0;
+    margin-top: 40px;
+    z-index: 1;
+  }
+  .menu .filters {
+    padding: 0;
+  }
+  .filter {
+    order: -1;
+    width: 35% !important;
   }
 }
 @media screen and (min-width: 992px) {
+  .filter {
+    width: 25% !important;
+  }
 }

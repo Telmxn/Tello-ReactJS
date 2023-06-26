@@ -1,39 +1,66 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Advertisement from "./Advertisement";
 import appleLogo from "../assets/images/apple-logo.png";
 import iPhoneAirTag from "../assets/images/iPhoneAirTag.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { getSelectedProducts } from "../store/actions/productThunk";
+import LoadingScreen from "./LoadingScreen";
+import SkeletonText from "./skeletons/SkeletonText";
 
-const MenuItem = ({ name, link, dropdown, style }) => {
+const MenuItem = ({ name, link, dropdownCategory, style }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const { products, status } = useSelector((state) => state.product);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      getSelectedProducts({ order: "created", category: dropdownCategory })
+    );
+  }, []);
+
+  if (status == "loading") {
+    <LoadingScreen />;
+  }
+
+  const filtered = products?.selectedProducts.filter(
+    (selected) =>
+      selected.order == "created" &&
+      selected.category == dropdownCategory &&
+      selected.length != 0
+  )[0];
 
   return (
     <li
       className={`${isOpen ? style.openDropdown : ""} ${
-        dropdown && style.dropdown
+        dropdownCategory && style.dropdown
       }`}
       onClick={() => setIsOpen((prev) => !prev)}
     >
       <NavLink to={link}>{name}</NavLink>
-      {dropdown && (
+      {dropdownCategory && (
         <div className={`${isOpen ? style.open : ""} ${style.dropdownMenu}`}>
-          {dropdown.map((list) => {
-            return (
-              <ul key={list.id}>
-                <li>
-                  <h3>{list.name}</h3>
-                </li>
-
-                {list.dropdown.map((item) => {
+          <div className={style.leftPart}>
+            <ul>
+              {filtered != undefined ? (
+                filtered.data?.map((product) => {
                   return (
-                    <li key={item.id}>
-                      <Link to={item.link}>{item.name}</Link>
+                    <li key={product.id}>
+                      <Link to={"#"}>{product.name}</Link>
                     </li>
                   );
-                })}
-              </ul>
-            );
-          })}
+                })
+              ) : (
+                <>
+                  {[...Array(9).keys()].map((i) => {
+                    return <SkeletonText key={i} />;
+                  })}
+                </>
+              )}
+            </ul>
+          </div>
           <Advertisement
             isWhiteBack={false}
             logo={appleLogo}

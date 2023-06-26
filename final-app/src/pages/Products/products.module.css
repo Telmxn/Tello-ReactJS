@@ -2,6 +2,11 @@
   display: none;
   gap: 10px;
 }
+.breadCrumb a {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--gray-2);
+}
 .breadCrumb div a {
   margin-left: 10px;
 }
@@ -17,4 +22,34 @@
 .cards > div {
   min-width: unset;
   margin-bottom: 9px;
+}
+
+@media screen and (min-width: 576px) {
+  .cards {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media screen and (min-width: 768px) {
+  .breadCrumb {
+    display: flex;
+  }
+  .productsContainer {
+    margin: 24px 5% 120px;
+    position: relative;
+    min-height: 125vh;
+  }
+  .cards {
+    width: 65%;
+    margin-left: auto;
+    margin-top: 80px;
+    grid-template-columns: 1fr 1fr;
+    padding: 40px 0 40px 40px;
+    gap: 22px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .cards {
+    width: 75%;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }

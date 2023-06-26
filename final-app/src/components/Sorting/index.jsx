@@ -1,8 +1,8 @@
 import style from "./sorting.module.css";
 import sortingImage from "../../assets/images/sorting.svg";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
-const Sorting = ({ setSortBy }) => {
+const Sorting = ({ setSortBy, count }) => {
   const data = [
     { id: 0, value: "created.desc", label: "Ən yenilər" },
     { id: 1, value: "price.asc", label: "Ucuzdan-bahaya" },
@@ -10,20 +10,19 @@ const Sorting = ({ setSortBy }) => {
     { id: 3, value: "name.asc", label: "Ada görə (A-Z)" },
     { id: 4, value: "name.desc", label: "Ada görə (Z-A)" },
   ];
-  const [items, setItem] = useState(data);
   const [selectedItem, setSelectedItem] = useState(null);
 
-  const toggleDropdown = () => setIsOpen(!isOpen);
+  const toggleDropdown = () => setIsShown(!isShown);
 
   const handleItemClick = (id) => {
     setSelectedItem(id);
     setIsOpen(!isOpen);
+    setIsShown(!isShown);
     setSortBy(data.find((item) => item.id == id).value);
   };
 
   const [isOpen, setIsOpen] = useState(false);
-
-  // const sortingRef = useRef();
+  const [isShown, setIsShown] = useState(false);
 
   return (
     <div className={style.sorting}>
@@ -31,23 +30,24 @@ const Sorting = ({ setSortBy }) => {
         <img src={sortingImage} alt="Sort" />
         <p>Sıralama</p>
       </button>
-      {/* <select ref={sortingRef} className={style.sort}>
-        <option value="created">Ən yenilər</option>
-        <option value="price.asc">Ucuzdan-bahaya</option>
-        <option value="price.desc">Bahadan-ucuza</option>
-        <option value="name.asc">Ada görə (A-Z)</option>
-        <option value="name.desc">Ada görə (Z-A)</option>
-      </select> */}
-
-      <div className={style.dropdown}>
-        {/* <div className={style.dropdownHeader} onClick={toggleDropdown}>
-        {selectedItem
-          ? items.find((item) => item.id == selectedItem).label
-          : "Select your destination"}
-        <i className={`fa fa-chevron-right icon ${isOpen && style.open}`}></i>
-      </div> */}
+      <p className={style.count}>
+        {count == 0 ? "Məhsul tapılmadı" : `${count} məhsul tapıldı`}
+      </p>
+      <div className={`${style.dropdown} ${isShown && style.open}`}>
+        <div
+          className={style.dropdownHeader}
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {selectedItem
+            ? data.find((item) => item.id == selectedItem).label
+            : "Sıralama"}
+          <img
+            src="/next.svg"
+            className={`${style.icon} ${isOpen && style.open}`}
+          />
+        </div>
         <div className={`${style.dropdownBody} ${isOpen && style.open}`}>
-          {items.map((item) => (
+          {data.map((item) => (
             <div
               className={style.dropdownItem}
               onClick={(e) => handleItemClick(e.target.id)}

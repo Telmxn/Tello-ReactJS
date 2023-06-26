@@ -1,4 +1,4 @@
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import style from "./products.module.css";
 import Filtering from "../../components/Filtering";
 import Card from "../../components/Card";
@@ -8,16 +8,12 @@ import { useEffect, useState } from "react";
 import SkeletonCard from "../../components/skeletons/SkeletonCard";
 
 const Products = () => {
+  const params = useParams();
   const [sortBy, setSortBy] = useState(null);
+  const [categories, setCategories] = useState([]);
+  const [colors, setColors] = useState([]);
   const [priceAbove, setPriceAbove] = useState(0);
   const [priceBelow, setPriceBelow] = useState(0);
-
-  let location = useLocation();
-  console.log(location);
-
-  console.log(useParams());
-
-  let paths = location.pathname?.split("/").slice(2);
 
   const { products, status } = useSelector((state) => state.product);
 
@@ -30,37 +26,106 @@ const Products = () => {
       getPageProducts({
         sortBy: sorting != undefined ? sorting[0] : null,
         sortOrder: sorting?.length == 2 ? sorting[1] : null,
-        category: "apple",
       })
     );
   }, [sortBy]);
-  console.log(sorting?.length == 2 ? sorting[1] : null);
 
-  console.log(products.pageProducts);
+  let filteredProducts = products?.pageProducts?.filter((item) => {
+    if (priceAbove != 0 && priceBelow != 0) {
+      return item.price.raw > priceAbove && item.price.raw < priceBelow;
+    } else if (priceAbove != 0 && priceBelow == 0) {
+      return item.price.raw > priceAbove;
+    } else if (priceAbove == 0 && priceBelow != 0) {
+      return item.price.raw < priceBelow;
+    }
+    return item;
+  });
 
-  const filteredProducts = products?.pageProducts?.filter(
-    (item) => item.price.raw > priceAbove
-  );
+  filteredProducts = filteredProducts.map((product) => {
+    if (categories.length != 0) {
+      for (let category of categories) {
+        let res = false;
+        product.categories.forEach((pCategory) => {
+          if (pCategory.name == category) {
+            console.log(product);
+            res = true;
+            return product;
+          }
+        });
+        if (res) {
+          return product;
+        }
+      }
+    } else {
+      return product;
+    }
+  });
 
+  // filteredProducts = filteredProducts.map((product) => {
+  //   if (categories.length != 0) {
+  //     console.log(categories.length, "Girdi");
+  //     for (let category of categories) {
+  //       let res = false;
+  //       product.categories.forEach((pCategory) => {
+  //         if (pCategory.name == category) {
+  //           console.log(product);
+  //           res = true;
+  //           return product;
+  //         }
+  //       });
+  //       if (res) {
+  //         return product;
+  //       }
+  //     }
+  //   } else {
+  //     return product;
+  //   }
+  // });
+
+  filteredProducts = filteredProducts.filter(Boolean);
+  console.log(filteredProducts);
   return (
     <div className={style.productsContainer}>
       <div className={style.breadCrumb}>
         <Link to={"/"}>Ana səhifə</Link>
-        {paths.map((path, index) => {
-          return (
-            <div key={index}>
-              <img src="/next.svg" alt="In" />
-              <Link to={"/" + path}>
-                {path.charAt(0).toUpperCase() + path.slice(1)}
-              </Link>
-            </div>
-          );
-        })}
+
+        {params.category == undefined ? (
+          <>
+            <img src="/next.svg" alt="In" />
+            <Link to="/products">Məhsullar</Link>
+          </>
+        ) : (
+          <>
+            <img src="/next.svg" alt="In" />
+            <Link to={"/products/" + params.category}>
+              {params.category.charAt(0).toUpperCase() +
+                params.category.slice(1)}
+            </Link>
+          </>
+        )}
+        {params.subcategory == undefined ? (
+          ""
+        ) : (
+          <>
+            <img src="/next.svg" alt="In" />
+            <Link to={`/products/${params.category}/${params.subcategory}`}>
+              {params.subcategory.charAt(0).toUpperCase() +
+                params.subcategory.slice(1)}
+            </Link>
+          </>
+        )}
       </div>
-      <Filtering setSortBy={setSortBy} />
+      <Filtering
+        setSortBy={setSortBy}
+        setCategories={setCategories}
+        setPriceAbove={setPriceAbove}
+        setPriceBelow={setPriceBelow}
+        setColors={setColors}
+        count={filteredProducts.length}
+      />
       <div className={style.cards}>
         {status == "fulfilled" ? (
-          filteredProducts.map((product) => {
+          filteredProducts?.map((product) => {
             return (
               <Card
                 key={product.id}
