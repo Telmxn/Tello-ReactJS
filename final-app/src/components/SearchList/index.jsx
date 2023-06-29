@@ -8,9 +8,9 @@ import { clearSearchHistory } from "../../store/reducers/searchHistory";
 import { getSearchedProducts } from "../../store/actions/productThunk";
 import SkeletonSearch from "../skeletons/SkeletonSearch";
 
-const SearhList = ({ isSearching, search }) => {
+const SearhList = ({ isSearching, search, handleForm }) => {
   const { history } = useSelector((state) => state.searchHistory);
-  const { products, status } = useSelector((state) => state.product);
+  const { searchedProducts } = useSelector((state) => state.product);
 
   const dispatch = useDispatch();
 
@@ -19,7 +19,6 @@ const SearhList = ({ isSearching, search }) => {
       dispatch(getSearchedProducts({ query: search }));
     }
   }, [search]);
-
   const handleClearSearchHistory = () => {
     dispatch(clearSearchHistory());
   };
@@ -43,7 +42,7 @@ const SearhList = ({ isSearching, search }) => {
               </div>
               <div className={style.buttons}>
                 {history?.map((button, index) => {
-                  return <SearchButton name={button} link={"#"} key={index} />;
+                  return <SearchButton name={button} key={index} />;
                 })}
               </div>
             </div>
@@ -72,16 +71,16 @@ const SearhList = ({ isSearching, search }) => {
               <button className={style.clear}>Təmizlə</button>
             </div>
             <div className={style.result}>
-              {status == "loading" ? (
+              {searchedProducts?.status == "loading" ? (
                 <>
                   <SkeletonSearch />
                   <SkeletonSearch />
                   <SkeletonSearch />
                 </>
-              ) : products.searchedProducts == undefined ? (
+              ) : searchedProducts?.products == undefined ? (
                 "Məhsul tapılmadı."
               ) : (
-                products.searchedProducts?.map((product) => {
+                searchedProducts?.products.map((product) => {
                   return (
                     <SearchCard
                       image={product.image.url}
@@ -94,7 +93,12 @@ const SearhList = ({ isSearching, search }) => {
               )}
             </div>
           </div>
-          <Link to={"#"}>Hamısını göstər</Link>
+          <Link
+            to={`searchedProducts/${search}`}
+            onClick={() => handleForm(search)}
+          >
+            Hamısını göstər
+          </Link>
         </>
       )}
     </div>

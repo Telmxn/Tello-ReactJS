@@ -31,7 +31,9 @@ const Sorting = ({ setSortBy, count }) => {
         <p>Sıralama</p>
       </button>
       <p className={style.count}>
-        {count == 0 ? "Məhsul tapılmadı" : `${count} məhsul tapıldı`}
+        {count == 0 || count == undefined
+          ? "Məhsul tapılmadı"
+          : `${count} məhsul tapıldı`}
       </p>
       <div className={`${style.dropdown} ${isShown && style.open}`}>
         <div

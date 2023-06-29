@@ -11,7 +11,7 @@ import SkeletonText from "./skeletons/SkeletonText";
 const MenuItem = ({ name, link, dropdownCategory, style }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { products, status } = useSelector((state) => state.product);
+  const { selectedProducts } = useSelector((state) => state.product);
 
   const dispatch = useDispatch();
 
@@ -21,11 +21,11 @@ const MenuItem = ({ name, link, dropdownCategory, style }) => {
     );
   }, []);
 
-  if (status == "loading") {
+  if (selectedProducts.status == "loading") {
     <LoadingScreen />;
   }
 
-  const filtered = products?.selectedProducts.filter(
+  const filtered = selectedProducts.products?.filter(
     (selected) =>
       selected.order == "created" &&
       selected.category == dropdownCategory &&
@@ -48,7 +48,7 @@ const MenuItem = ({ name, link, dropdownCategory, style }) => {
                 filtered.data?.map((product) => {
                   return (
                     <li key={product.id}>
-                      <Link to={"#"}>{product.name}</Link>
+                      <Link to={`/product/${product.id}`}>{product.name}</Link>
                     </li>
                   );
                 })

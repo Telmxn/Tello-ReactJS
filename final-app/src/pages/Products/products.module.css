@@ -36,7 +36,9 @@
   .productsContainer {
     margin: 24px 5% 120px;
     position: relative;
-    min-height: 125vh;
+  }
+  .filterProducts {
+    display: flex;
   }
   .cards {
     width: 65%;

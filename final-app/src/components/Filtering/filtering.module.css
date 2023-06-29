@@ -25,14 +25,21 @@
 }
 @media screen and (min-width: 768px) {
   .filtering {
-    position: absolute;
-    width: 100%;
+    width: 35%;
     border-bottom: none;
+    align-items: unset;
   }
   .filtering > div > button {
     display: none;
   }
   .filtering .divider {
     display: none;
+  }
+}
+@media screen and (min-width: 992px) {
+  .filtering {
+    width: 25%;
+    border-bottom: none;
+    align-items: unset;
   }
 }

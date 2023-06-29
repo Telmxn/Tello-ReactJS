@@ -11,7 +11,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-image: url(./sliderBackground.png);
+  background-image: url(/sliderBackground.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

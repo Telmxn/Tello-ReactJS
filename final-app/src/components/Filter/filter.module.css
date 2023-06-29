@@ -115,6 +115,7 @@
 }
 
 .filterBy .headerFilter {
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   padding: 10px 16px;
@@ -272,14 +273,9 @@
   }
   .menu .filters {
     padding: 0;
+    margin-top: 0;
   }
   .filter {
     order: -1;
-    width: 35% !important;
-  }
-}
-@media screen and (min-width: 992px) {
-  .filter {
-    width: 25% !important;
   }
 }

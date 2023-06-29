@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
-const SearchButton = ({ name, link }) => {
-  return <Link to={link}>{name}</Link>;
+const SearchButton = ({ name }) => {
+  return <Link to={`searchedProducts/${name}`}>{name}</Link>;
 };
 
 export default SearchButton;

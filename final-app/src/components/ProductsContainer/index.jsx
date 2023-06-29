@@ -9,11 +9,11 @@ import { getSelectedProducts } from "../../store/actions/productThunk";
 import SkeletonCard from "../skeletons/SkeletonCard";
 
 const ProductsContainer = ({ title, link, order, category }) => {
-  const { products } = useSelector((state) => state.product);
+  const { selectedProducts } = useSelector((state) => state.product);
 
   const dispatch = useDispatch();
 
-  const filtered = products?.selectedProducts?.filter(
+  const filtered = selectedProducts?.products?.filter(
     (selected) =>
       selected.order == order &&
       selected.category == category &&
@@ -33,6 +33,7 @@ const ProductsContainer = ({ title, link, order, category }) => {
             return (
               <Card
                 key={product.id}
+                id={product.id}
                 price={product.price.formatted}
                 name={product.name}
                 image={product.image.url}

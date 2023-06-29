@@ -6,6 +6,7 @@ import { addSearchHistory } from "../../store/reducers/searchHistory";
 import closeIcon from "../../assets/images/darkClose.svg";
 import SearchList from "../SearchList";
 import useDebounce from "../../hooks/useDebounce";
+import { useNavigate } from "react-router-dom";
 
 const Search = ({ searchRef }) => {
   const dispatch = useDispatch();
@@ -20,19 +21,25 @@ const Search = ({ searchRef }) => {
 
   const closeSearch = (e) => {
     e.preventDefault();
-    setIsSearching(false);
+    setTimeout(() => {
+      setIsSearching(false);
+    }, 200);
   };
 
   const handleChange = () => {
     setSearch(searchRef.current.value);
   };
 
+  const navigate = useNavigate();
+
   const handleForm = (e) => {
     if (e.keyCode === 13) {
+      navigate(`/searchedProducts/${searchRef.current.value}`);
       dispatch(addSearchHistory(searchRef.current.value));
+      searchRef.current.value = "";
+      setSearch("");
     }
   };
-
   return (
     <div
       className={`${isSearching ? style.searching : ""} ${
@@ -61,7 +68,11 @@ const Search = ({ searchRef }) => {
           <img src={closeIcon} alt="Close" />
         </button>
       </form>
-      <SearchList isSearching={isSearching} search={debounceSearch} />
+      <SearchList
+        isSearching={isSearching}
+        search={debounceSearch}
+        handleForm={handleForm}
+      />
     </div>
   );
 };

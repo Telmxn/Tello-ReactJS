@@ -51,7 +51,7 @@ const Menu = ({ searchRef }) => {
                 return category.children.length == 0 ? (
                   <MenuItem
                     name={category.name}
-                    link="#"
+                    link={`products/${category.slug}`}
                     style={style}
                     key={category.id}
                   />
@@ -60,7 +60,7 @@ const Menu = ({ searchRef }) => {
                     return (
                       <MenuItem
                         name={categoryChildren.name}
-                        link="#"
+                        link={`products/${categoryChildren.slug}`}
                         style={style}
                         dropdownCategory={categoryChildren.slug}
                         key={categoryChildren.id}

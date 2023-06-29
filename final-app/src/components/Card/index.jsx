@@ -2,10 +2,11 @@ import style from "./card.module.css";
 import redAzn from "../../assets/images/redazn.svg";
 import grayAzn from "../../assets/images/grayazn.svg";
 import blackAzn from "../../assets/images/blackazn.svg";
+import { Link } from "react-router-dom";
 
-const Card = ({ onSale, price, name, image }) => {
+const Card = ({ id, onSale, price, name, image }) => {
   return (
-    <div className={style.card}>
+    <Link to={`/product/${id}`} className={style.card}>
       <img src={image} alt="Phone" />
       <h5>{name}</h5>
       <div className={style.price}>
@@ -27,7 +28,7 @@ const Card = ({ onSale, price, name, image }) => {
           </p>
         )}
       </div>
-    </div>
+    </Link>
   );
 };
 

@@ -18,8 +18,6 @@ const Category = ({ isFull, name, link, background }) => {
     (category) => category.name == name
   )[0];
 
-  console.log(filtered);
-
   return (
     <div
       className={`${isFull ? style.fullCategory : ""} ${style.category}`}
@@ -30,7 +28,7 @@ const Category = ({ isFull, name, link, background }) => {
           <div className={style.info}>
             <h3>{filtered.name}</h3>
             <p>Məhsul sayı: {filtered.products}</p>
-            <Link to={link}>
+            <Link to={`products/${link}`}>
               Məhsullara keçid <img src={arrowRight} alt="Right Arrow" />
             </Link>
           </div>

@@ -4,9 +4,6 @@ import Advertisement from "../../components/Advertisement";
 import appleLogo from "../../assets/images/apple-logo.png";
 import iPhoneAirTag from "../../assets/images/iPhoneAirTag.jpg";
 import iPhone11 from "../../assets/images/iphone11.jpeg";
-import telephoneC from "../../assets/images/telephoneC.png";
-import watchC from "../../assets/images/watchC.png";
-import accesoriseC from "../../assets/images/accesoriseC.png";
 import phoneback from "../../assets/images/phoneback.svg";
 import watchback from "../../assets/images/watchback.svg";
 import toshiba from "../../assets/images/toshiba.png";
@@ -65,12 +62,12 @@ const Home = () => {
       <AdsSlider />
       <ProductsContainer
         title="Ən çox satılan məhsullar"
-        link={"#"}
+        link="products"
         order="sort_order"
       />
       <ProductsContainer
         title="Yeni gələn məhsullar"
-        link={"#"}
+        link="products"
         order="created"
       />
       <div className={style.adsContainer}>
@@ -95,7 +92,7 @@ const Home = () => {
       </div>
       <ProductsContainer
         title="Yeni gələn aksessuarlar"
-        link={"#"}
+        link="products"
         order="created"
         category="accessories"
       />
@@ -103,17 +100,17 @@ const Home = () => {
         <Category
           name="Telefonlar"
           isFull
-          link={"#"}
+          link="telefonlar"
           background={`url(${phoneback})`}
         />
         <Category
           name="Smart Saat"
-          link={"#"}
+          link="smart-watch"
           background={`url(${watchback})`}
         />
         <Category
           name="Aksesuarlar"
-          link={"#"}
+          link="accessories"
           background={`url(${watchback})`}
         />
       </div>

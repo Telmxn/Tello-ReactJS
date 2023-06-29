@@ -28,7 +28,7 @@
   font-weight: 500;
   color: var(--gray-1);
 }
-.products .cards > div:last-child {
+.products .cards > a:last-child {
   display: none;
 }
 @media screen and (min-width: 992px) {
@@ -57,7 +57,7 @@
   .products .cards {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   }
-  .products .cards > div:last-child {
+  .products .cards > a:last-child {
     display: flex;
   }
 }
