@@ -24,7 +24,7 @@ const Header = () => {
         <Link to={"#"}>
           <img src={heartIcon} alt="Favorites" />
         </Link>
-        <Link to={"#"} className={style.cart}>
+        <Link to={"/cart"} className={style.cart}>
           <img src={shoppingCartIcon} alt="Shopping Cart" />
           <span>0</span>
         </Link>

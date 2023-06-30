@@ -19,7 +19,7 @@
   padding: 32px 16px;
   gap: 15px;
 }
-.cards > div {
+.cards > a {
   min-width: unset;
   margin-bottom: 9px;
 }

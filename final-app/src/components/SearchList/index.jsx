@@ -8,7 +8,7 @@ import { clearSearchHistory } from "../../store/reducers/searchHistory";
 import { getSearchedProducts } from "../../store/actions/productThunk";
 import SkeletonSearch from "../skeletons/SkeletonSearch";
 
-const SearhList = ({ isSearching, search, handleForm }) => {
+const SearchList = ({ isSearching, search, handleForm }) => {
   const { history } = useSelector((state) => state.searchHistory);
   const { searchedProducts } = useSelector((state) => state.product);
 
@@ -105,4 +105,4 @@ const SearhList = ({ isSearching, search, handleForm }) => {
   );
 };
 
-export default SearhList;
+export default SearchList;

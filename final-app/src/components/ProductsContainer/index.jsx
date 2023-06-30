@@ -24,8 +24,6 @@ const ProductsContainer = ({ title, link, order, category }) => {
     dispatch(getSelectedProducts({ order: order, category: category }));
   }, []);
 
-  console.log("Girir");
-
   return (
     <div className={style.products}>
       <h4>{title}</h4>
