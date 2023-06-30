@@ -33,6 +33,9 @@
   display: flex;
   justify-content: space-between;
 }
+.price .redAzn {
+  display: none;
+}
 .price p {
   display: flex;
   color: var(--main-default);
@@ -79,6 +82,8 @@
   background-color: var(--gray-6);
   color: var(--gray-2);
   cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
 }
 .rightPart .options .storage:hover {
   background-color: var(--gray-3);
@@ -220,6 +225,9 @@
   font-weight: 500;
   line-height: 28px;
 }
+.rating .rightPart .topRight span {
+  display: none;
+}
 .rating .rightPart .aboutProduct {
   margin: 8px 0 24px;
   font-size: 12px;
@@ -257,7 +265,7 @@ form h2 {
   background-repeat: no-repeat;
   background-position-y: center;
   background-size: 12px;
-  background-position-x: 96%;
+  background-position-x: 97%;
   color: var(--gray-3, #828282);
 }
 .rateForm .input input,
@@ -268,6 +276,10 @@ select {
   border-radius: 8px;
   border: none;
   margin-top: 8px;
+  outline: none;
+}
+.rateForm .input textarea {
+  resize: none;
 }
 .rateForm button {
   background-color: var(--main-default);
@@ -279,7 +291,20 @@ select {
   border-radius: 8px;
   color: #fff;
 }
+.topRating {
+  display: none;
+}
+.rightPart > .cart {
+  display: none;
+}
+.tabContent.technic .about {
+  display: none;
+}
 @media screen and (min-width: 768px) {
+  .productContainer .topPart {
+    margin-top: 60px;
+    display: flex;
+  }
   .breadCrumb {
     display: flex;
   }
@@ -287,9 +312,195 @@ select {
     margin: 26px 5% 120px;
     position: relative;
   }
+  .productContainer .topPart {
+    margin-bottom: 100px;
+    gap: 35px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .rightPart h2 {
+    font-size: 20px;
+    margin: 0 0 17px 0;
+    line-height: 28px;
+  }
+  .price {
+    border: none;
+    padding: 12px 0;
+  }
+  .price p {
+    color: var(--danger-600, #db2c66);
+  }
+  .price .greenAzn {
+    display: none;
+  }
+  .price .cart {
+    display: none;
+  }
+  .price .redAzn {
+    margin-left: 4px;
+    display: inline-block;
+  }
+  .rightPart .static {
+    padding-top: 24px;
+    margin: 0;
+    border-top: 1px solid var(--gray-6);
+  }
+  .rightPart .options p {
+    color: var(--gray-2, #4f4f4f);
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .rightPart .storages {
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--gray-6);
+  }
+  .count p {
+    display: none;
+  }
+  .rightPart > .cart {
+    margin-top: 56px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    color: #fff;
+    background-color: var(--main-default);
+    border: none;
+    border-radius: 8px;
+    padding: 14px 48px;
+  }
+  .productContainer > .about {
+    display: none;
+  }
+  .tabs {
+    padding: 0 40px;
+    display: flex;
+    gap: 180px;
+    border-top: none;
+    border-bottom: 1px solid var(--gray-4);
+  }
+  .tabs button {
+    color: var(--gray-4);
+    background: none;
+    line-height: 28px;
+    font-size: 20px;
+    padding: 16px 0;
+    border: none;
+  }
+  .tabs button.active {
+    color: var(--gray-2);
+    border-bottom: none;
+    font-weight: 500;
+  }
+  .tabContent {
+    margin: 32px 0 80px;
+  }
+  .tabContent.technic {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .tabContent.technic .about {
+    display: inline-block;
+  }
+  .tabContent.technic .about div p {
+    overflow: unset;
+    display: inline-block;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+  }
+  .tabContent.technic .about > div {
+    margin-top: 26px;
+  }
+  .tabContent .rating {
+    padding: 32px 0;
+    display: flex;
+  }
+  .tabContent .rating .leftPart {
+    padding: 0 43px;
+    justify-content: center;
+    gap: 40px;
+    border-right: 1px solid var(--gray-4);
+  }
+  .tabContent .rating .leftPart .rate {
+    border-bottom: none;
+  }
+  .tabContent .rating .leftPart .rate img {
+    width: 32px;
+  }
+  .tabContent .rating .rightPart {
+    text-align: left;
+    padding: 6px 31px;
+  }
+  .rating .rightPart .topRight {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .rating .rightPart .topRight span {
+    display: inline-flex;
+    color: var(--gray-2, #4f4f4f);
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .rating .rightPart .aboutProduct {
+    margin: 8px 0 16px;
+  }
+  form h2 {
+    margin: 48px 0;
+  }
+  .rateForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .rateForm .input:nth-child(n + 3) {
+    grid-column: 1/-1;
+  }
+  .rateForm .input input,
+  textarea,
+  select {
+    font-size: 14px;
+  }
+  .rateForm button {
+    grid-column: 2/-1;
+    width: fit-content;
+    margin-left: auto;
+  }
+  .topRating {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .topRating .stars {
+    display: flex;
+    gap: 4px;
+    height: 18px;
+  }
+  .topRating span {
+    color: var(--gray-2, #4f4f4f);
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .topRating .divider {
+    width: 1px;
+    height: 16px;
+    background: var(--gray-6, #f2f2f2);
+  }
+  .topRating .ratings {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    color: var(--blue-link, #2d9cdb);
+  }
 }
 @media screen and (min-width: 992px) {
-  .imageGallery {
-    width: 50%;
+  .tabContent.technic {
+    margin: 32px 80px 80px;
+    gap: 10%;
+  }
+  .tabContent .rating .rightPart {
+    padding: 6px 10% 6px 31px;
+  }
+  form {
+    padding: 0 15%;
   }
 }

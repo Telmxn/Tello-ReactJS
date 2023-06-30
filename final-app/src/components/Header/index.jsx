@@ -6,7 +6,7 @@ import heartIcon from "../../assets/images/heart.svg";
 import shoppingCartIcon from "../../assets/images/shopping-cart.svg";
 import Menu from "../Menu";
 import Search from "../Search";
-import { useRef } from "react";
+import { memo, useRef } from "react";
 
 const Header = () => {
   const searchRef = useRef();
@@ -34,4 +34,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);

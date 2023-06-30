@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getProduct } from "../../store/actions/productThunk";
 import greenAzn from "../../assets/images/greenazn.svg";
+import redAzn from "../../assets/images/redazn.svg";
 import cartIcon from "../../assets/images/cart.svg";
 import star from "../../assets/images/star.svg";
 import emptyStar from "../../assets/images/emptyStar.svg";
@@ -69,7 +70,7 @@ const ProductDetail = () => {
     navigate("/error");
   }
 
-  console.log(singleProduct.product);
+  // console.log(singleProduct.product);
 
   const handleColor = (id) => {
     setSelectedColor(id);
@@ -120,10 +121,23 @@ const ProductDetail = () => {
         </div>
         <div className={style.rightPart}>
           <h2>{singleProduct.product?.name}</h2>
+          <div className={style.topRating}>
+            <div className={style.stars}>
+              <img src={star} alt="Rating" />
+              <img src={star} alt="Rating" />
+              <img src={star} alt="Rating" />
+              <img src={star} alt="Rating" />
+              <img src={emptyStar} alt="Rating" />
+            </div>
+            <span>(226)</span>
+            <div className={style.divider}></div>
+            <p className={style.ratings}>57 rəy</p>
+          </div>
           <div className={style.price}>
             <p>
               {price}
-              <img src={greenAzn} alt="AZN" />
+              <img src={greenAzn} className={style.greenAzn} alt="AZN" />
+              <img src={redAzn} className={style.redAzn} alt="AZN" />
             </p>
             <button className={style.cart}>
               <img src={cartIcon} alt="Cart" />
@@ -170,7 +184,6 @@ const ProductDetail = () => {
                         className={`${style.storage} ${
                           selectedStorage == option.id ? style.selected : ""
                         }`}
-                        {...console.log(selectedStorage)}
                         key={option.id}
                         onClick={() => handleStorage(option.id)}
                       >
@@ -181,13 +194,17 @@ const ProductDetail = () => {
               </div>
             )}
 
-            <div className={`${style.options}`}>
+            <div className={`${style.options} ${style.count}`}>
               <p>Miqdar:</p>
               <button onClick={minusCount}>-</button>
               <span>{count}</span>
               <button onClick={plusCount}>+</button>
             </div>
           </div>
+          <button className={style.cart}>
+            <img src={cartIcon} alt="Cart" />
+            Səbətə at
+          </button>
         </div>
       </div>
       <div className={style.about}>
@@ -217,72 +234,84 @@ const ProductDetail = () => {
         </div>
         <div className={style.tabContents}>
           <div
-            className={`${style.tabContent} ${
+            className={`${style.tabContent} ${style.technic} ${
               isComments == false && style.hidden
             }`}
           >
-            <div className={style.addInfo}>
-              <h2>Əsas göstəricilər</h2>
-              <ul>
-                <li>
-                  <p>İstehsalçı</p>
-                  <p>Apple</p>
-                </li>
-                <li>
-                  <p>İstehsalçı</p>
-                  <p>Apple</p>
-                </li>
-                <li>
-                  <p>İstehsalçı</p>
-                  <p>Apple</p>
-                </li>
-                <li>
-                  <p>İstehsalçı</p>
-                  <p>Apple</p>
-                </li>
-              </ul>
+            <div className={style.tabLeft}>
+              <div className={style.addInfo}>
+                <h2>Əsas göstəricilər</h2>
+                <ul>
+                  <li>
+                    <p>İstehsalçı</p>
+                    <p>Apple</p>
+                  </li>
+                  <li>
+                    <p>İstehsalçı</p>
+                    <p>Apple</p>
+                  </li>
+                  <li>
+                    <p>İstehsalçı</p>
+                    <p>Apple</p>
+                  </li>
+                  <li>
+                    <p>İstehsalçı</p>
+                    <p>Apple</p>
+                  </li>
+                </ul>
+              </div>
+              <div className={style.addInfo}>
+                <h2>Əlavə göstəricilər</h2>
+                <ul>
+                  <li>
+                    <p>İstehsalçı</p>
+                    <p>Apple</p>
+                  </li>
+                  <li>
+                    <p>İstehsalçı</p>
+                    <p>Apple</p>
+                  </li>
+                  <li>
+                    <p>İstehsalçı</p>
+                    <p>Apple</p>
+                  </li>
+                  <li>
+                    <p>İstehsalçı</p>
+                    <p>Apple</p>
+                  </li>
+                </ul>
+              </div>
+              <div className={style.addInfo}>
+                <h2>Üstünlüklər</h2>
+                <ul>
+                  <li>
+                    <p>İstehsalçı</p>
+                    <p>Apple</p>
+                  </li>
+                  <li>
+                    <p>İstehsalçı</p>
+                    <p>Apple</p>
+                  </li>
+                  <li>
+                    <p>İstehsalçı</p>
+                    <p>Apple</p>
+                  </li>
+                  <li>
+                    <p>İstehsalçı</p>
+                    <p>Apple</p>
+                  </li>
+                </ul>
+              </div>
             </div>
-            <div className={style.addInfo}>
-              <h2>Əlavə göstəricilər</h2>
-              <ul>
-                <li>
-                  <p>İstehsalçı</p>
-                  <p>Apple</p>
-                </li>
-                <li>
-                  <p>İstehsalçı</p>
-                  <p>Apple</p>
-                </li>
-                <li>
-                  <p>İstehsalçı</p>
-                  <p>Apple</p>
-                </li>
-                <li>
-                  <p>İstehsalçı</p>
-                  <p>Apple</p>
-                </li>
-              </ul>
-            </div>
-            <div className={style.addInfo}>
-              <h2>Üstünlüklər</h2>
-              <ul>
-                <li>
-                  <p>İstehsalçı</p>
-                  <p>Apple</p>
-                </li>
-                <li>
-                  <p>İstehsalçı</p>
-                  <p>Apple</p>
-                </li>
-                <li>
-                  <p>İstehsalçı</p>
-                  <p>Apple</p>
-                </li>
-                <li>
-                  <p>İstehsalçı</p>
-                  <p>Apple</p>
-                </li>
-              </ul>
+            <div className={style.tabRight}>
+              <div className={style.about}>
+                <h2>Məhsul haqqında</h2>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: singleProduct.product?.description,
+                  }}
+                />
+              </div>
             </div>
           </div>
           <div className={`${style.tabContent} ${isComments && style.hidden}`}>
@@ -300,6 +329,7 @@ const ProductDetail = () => {
               <div className={style.rightPart}>
                 <div className={style.topRight}>
                   <h3>Gunel Mammadova</h3>
+                  <span>5 gün əvvəl</span>
                 </div>
                 <p className={style.aboutProduct}>Yaddaş - 64, Rəng - Qara</p>
                 <p className={style.ratingDesc}>
@@ -326,6 +356,7 @@ const ProductDetail = () => {
               <div className={style.rightPart}>
                 <div className={style.topRight}>
                   <h3>Gunel Mammadova</h3>
+                  <span>5 gün əvvəl</span>
                 </div>
                 <p className={style.aboutProduct}>Yaddaş - 64, Rəng - Qara</p>
                 <p className={style.ratingDesc}>

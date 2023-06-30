@@ -36,6 +36,19 @@
 }
 @media screen and (min-width: 768px) {
   .image-gallery-content .image-gallery-slide .image-gallery-image {
+    height: 288px;
+  }
+  .image-gallery-thumbnail-inner,
+  .image-gallery-thumbnail-image {
+    height: 66px !important;
+  }
+  .image-gallery-svg {
+    width: 20px !important;
+    height: 40px !important;
+  }
+}
+@media screen and (min-width: 992px) {
+  .image-gallery-content .image-gallery-slide .image-gallery-image {
     height: 388px;
   }
   .image-gallery-thumbnail-inner,
