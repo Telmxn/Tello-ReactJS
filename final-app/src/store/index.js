@@ -4,6 +4,7 @@ import categorySlice from "./reducers/categories";
 import searchHistorySlice from "./reducers/searchHistory";
 import { persistStore, persistReducer, PERSIST } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import cartSlice from "./reducers/cart";
 
 const persistConfig = {
   key: "root",
@@ -16,6 +17,7 @@ export const store = configureStore({
   reducer: {
     product: productSlice,
     category: categorySlice,
+    cart: cartSlice,
     searchHistory: searchHistory,
   },
   middleware: (getDefaultMiddleware) =>

@@ -1,45 +1,110 @@
 import style from "./cartProduct.module.css";
-import iphone from "../../assets/images/iphone 12.png";
 import redAzn from "../../assets/images/redazn.svg";
 import graydelete from "../../assets/images/delete.svg";
 import redDelete from "../../assets/images/red-delete.svg";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { updateCartItem } from "../../store/actions/cartThunk";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const CartProduct = () => {
-  const [count, setCount] = useState(1);
+const CartProduct = ({
+  id,
+  productId,
+  image,
+  name,
+  color,
+  price,
+  quantity,
+}) => {
+  const [count, setCount] = useState(quantity);
+
+  // const { cart } = useSelector((state) => state.cart);
+
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   // const cartId = localStorage.getItem("cartId");
+  //   // dispatch(getCart(cartId));
+  //   product = cart?.line_items?.filter((item) => {
+  //     return item.id == id;
+  //   })[0];
+  // }, [id]);
+  const cartId = localStorage.getItem("cartId");
+
+  const minusCount = () => {
+    if (count > 0) {
+      setCount((prev) => prev - 1);
+      toast.promise(
+        dispatch(
+          updateCartItem({ cartId: cartId, itemId: id, quantity: count - 1 })
+        ),
+        {
+          pending: "Səbət yenilənir.",
+          success: "Səbət yeniləndi.",
+          error: "Səbət yenilənmədi.",
+        }
+      );
+    }
+  };
+  const plusCount = () => {
+    setCount((prev) => prev + 1);
+    toast.promise(
+      dispatch(
+        updateCartItem({ cartId: cartId, itemId: id, quantity: count + 1 })
+      ),
+      {
+        pending: "Səbət yenilənir.",
+        success: "Səbət yeniləndi.",
+        error: "Səbət yenilənmədi.",
+      }
+    );
+  };
+
+  const removeItem = () => {
+    toast.promise(
+      dispatch(updateCartItem({ cartId: cartId, itemId: id, quantity: 0 })),
+      {
+        pending: "Məhsul səbətdən silinir.",
+        success: "Məhsul səbətdən silindi.",
+        error: "Məhsul silinmədi.",
+      }
+    );
+  };
 
   return (
-    <div className={style.product}>
-      <label className={style.container}>
-        <input type="checkbox" />
-        <span className={style.checkmark}></span>
-      </label>
-      <img src={iphone} alt="Product" />
-      <button>
-        <img src={graydelete} alt="Delete" className={style.grayDelete} />
-        <img src={redDelete} alt="Delete" className={style.redDelete} />
-      </button>
-      <div className={style.about}>
-        <div className={style.productInfo}>
-          <h4>
-            iPhone 12, 64 GB, Bənövşəyi, (MJNM3) Golden 5 G 8690604083886
-            0212042
-          </h4>
-          <p className={style.color}>
-            <span>Rəng:</span>Bənövşəyi
-          </p>
-          <p className={style.price}>
-            240
-            <img src={redAzn} alt="Manat" />
-          </p>
-        </div>
-        <div className={style.count}>
-          <button onClick={() => setCount((prev) => prev - 1)}>-</button>
-          <p>{count}</p>
-          <button onClick={() => setCount((prev) => prev + 1)}>+</button>
+    <>
+      <div className={style.product}>
+        <label className={style.container}>
+          <input type="checkbox" />
+          <span className={style.checkmark}></span>
+        </label>
+        <img src={image} alt="Product" />
+        <button onClick={removeItem}>
+          <img src={graydelete} alt="Delete" className={style.grayDelete} />
+          <img src={redDelete} alt="Delete" className={style.redDelete} />
+        </button>
+        <div className={style.about}>
+          <div className={style.productInfo}>
+            <Link to={`/product/${productId}`}>{name}</Link>
+            <p className={style.color}>
+              <span>Rəng:</span>
+              {color}
+            </p>
+            <p className={style.price}>
+              {price}
+              <img src={redAzn} alt="Manat" />
+            </p>
+          </div>
+          <div className={style.count}>
+            <button onClick={minusCount}>-</button>
+            <p>{count}</p>
+            <button onClick={plusCount}>+</button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

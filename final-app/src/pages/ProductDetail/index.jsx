@@ -10,6 +10,9 @@ import star from "../../assets/images/star.svg";
 import emptyStar from "../../assets/images/emptyStar.svg";
 import LoadingScreen from "../../components/LoadingScreen";
 import Gallery from "../../components/Gallery";
+import { addItemToCart } from "../../store/actions/cartThunk";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProductDetail = () => {
   const params = useParams();
@@ -70,8 +73,6 @@ const ProductDetail = () => {
     navigate("/error");
   }
 
-  // console.log(singleProduct.product);
-
   const handleColor = (id) => {
     setSelectedColor(id);
     setColorObj(
@@ -100,8 +101,56 @@ const ProductDetail = () => {
     setCount((prev) => prev + 1);
   };
 
+  const addToBasket = () => {
+    let options = {};
+    const colorgroupId = singleProduct.product.variant_groups.find(
+      (variant) => variant.name == "Rəng"
+    ).id;
+    options[colorgroupId] = selectedColor;
+    let storagegroupId = null;
+    if (
+      singleProduct.product.variant_groups?.some(
+        (variant) => variant.name == "Yaddaş"
+      )
+    ) {
+      storagegroupId = singleProduct.product.variant_groups.find(
+        (variant) => variant.name == "Yaddaş"
+      ).id;
+      options[storagegroupId] = selectedStorage;
+    }
+
+    let cartId = localStorage.getItem("cartId");
+    toast.promise(
+      dispatch(
+        addItemToCart({
+          cartId: cartId,
+          productId: singleProduct.product.id,
+          quantity: count,
+          options: options,
+        })
+      ),
+      {
+        pending: "Səbətə əlavə edilir.",
+        success: "Səbətə əlavə olundu.",
+        error: "Səbətə əlavə olunmadı.",
+      }
+    );
+  };
+
   return (
     <div className={style.productContainer}>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <div className={style.breadCrumb}>
         <Link to={"/"}>Ana səhifə</Link>
         <img src="/next.svg" alt="In" />
@@ -201,7 +250,7 @@ const ProductDetail = () => {
               <button onClick={plusCount}>+</button>
             </div>
           </div>
-          <button className={style.cart}>
+          <button className={style.cart} onClick={addToBasket}>
             <img src={cartIcon} alt="Cart" />
             Səbətə at
           </button>

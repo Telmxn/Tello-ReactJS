@@ -104,7 +104,7 @@
   flex-direction: column;
   gap: 12px;
 }
-.product .productInfo h4 {
+.product .productInfo a {
   color: var(--gray-1, #333);
   text-align: center;
   font-size: 14px;
@@ -152,6 +152,7 @@
     flex-wrap: nowrap;
     align-items: center;
     padding: 12px 16px;
+    height: fit-content;
   }
   .product > button {
     order: 2;
@@ -168,7 +169,7 @@
     flex-direction: row;
     flex-wrap: wrap;
   }
-  .product .about .productInfo h4 {
+  .product .about .productInfo a {
     width: 100%;
 
     margin-top: 0;
@@ -180,5 +181,7 @@
   .product .about .count {
     gap: 15px;
     position: unset;
+    margin-left: auto;
+    margin-right: 10%;
   }
 }

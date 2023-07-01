@@ -6,11 +6,32 @@ import heartIcon from "../../assets/images/heart.svg";
 import shoppingCartIcon from "../../assets/images/shopping-cart.svg";
 import Menu from "../Menu";
 import Search from "../Search";
-import { memo, useRef } from "react";
+import { memo, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCart } from "../../store/actions/cartThunk";
+import { createCart } from "../../commerce/cart";
 
 const Header = () => {
-  const searchRef = useRef();
+  const { cart } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
+  const searchRef = useRef();
+  useEffect(() => {
+    const cartId = localStorage.getItem("cartId");
+    let ready = false;
+    if (cartId == null) {
+      createCart({ submit: false }).then(() => (ready = true));
+      if (ready == true) {
+        dispatch(getCart({ id: cartId }));
+      }
+    } else {
+      dispatch(getCart({ id: cartId }));
+    }
+    const submitCartId = localStorage.getItem("submitCartId");
+    if (submitCartId == null) {
+      createCart({ submit: true });
+    }
+  }, [cart]);
   return (
     <header>
       <Menu searchRef={searchRef} />
@@ -26,7 +47,7 @@ const Header = () => {
         </Link>
         <Link to={"/cart"} className={style.cart}>
           <img src={shoppingCartIcon} alt="Shopping Cart" />
-          <span>0</span>
+          <span>{cart?.total_items ? cart?.total_items : "0"}</span>
         </Link>
       </div>
       <Search searchRef={searchRef} />
