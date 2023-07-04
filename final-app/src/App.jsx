@@ -9,6 +9,13 @@ import Error from "./pages/Error";
 import Cart from "./pages/Cart";
 import { useDispatch, useSelector } from "react-redux";
 import { makeCart } from "./store/actions/cartThunk";
+import Dashboard from "./pages/Dashboard";
+import Layout from "./components/Layout";
+import Login from "./pages/Login";
+import { useState } from "react";
+import LoginConfirm from "./pages/LoginConfirm";
+import AuthLayout from "./components/AuthLayout";
+import RestrictedLayout from "./components/RestrictedLayout";
 
 function App() {
   const { cart } = useSelector((state) => state.cart);
@@ -21,20 +28,26 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
-
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Products />}>
-          <Route path=":category_slug" element={null} />
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products />}>
+            <Route path=":category_slug" element={null} />
+          </Route>
+          <Route path="/searchedProducts/:query" element={<Products />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="*" element={<Error />} />
         </Route>
-        <Route path="/searchedProducts/:query" element={<Products />} />
-        <Route path="/product/:id" element={<ProductDetail />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="*" element={<Error />} />
+        <Route element={<RestrictedLayout />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/login/confirm" element={<LoginConfirm />} />
+          <Route path="/confirm/:token" element={<Home />} />
+        </Route>
+        <Route element={<AuthLayout />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
       </Routes>
-
-      <Footer />
     </div>
   );
 }

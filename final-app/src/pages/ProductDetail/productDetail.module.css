@@ -500,7 +500,7 @@ select {
   .tabContent .rating .rightPart {
     padding: 6px 10% 6px 31px;
   }
-  form {
+  .tabContent form {
     padding: 0 15%;
   }
 }

@@ -17,6 +17,12 @@ import style from "./home.module.css";
 import Category from "../../components/Category";
 import Features from "../../components/Features";
 import BrandsSlider from "../../components/BrandsSlider";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { createJWT } from "../../store/actions/customerThunk";
 
 const brands = [
   {
@@ -57,8 +63,33 @@ const brands = [
 ];
 
 const Home = () => {
+  const params = useParams();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (params.token != undefined) {
+      toast.promise(dispatch(createJWT({ token: params.token })), {
+        pending: "İstifadəçi hesaba daxil olur.",
+        success: "İstifadəçi hesaba daxil oldu.",
+        error: "İstifadəçi hesaba daxil ola bilmədi.",
+      });
+    }
+  }, []);
+
   return (
     <div>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <AdsSlider />
       <ProductsContainer
         title="Ən çox satılan məhsullar"
