@@ -12,12 +12,13 @@ const persistConfig = {
 };
 
 const searchHistory = persistReducer(persistConfig, searchHistorySlice);
+const cart = persistReducer(persistConfig, cartSlice);
 
 export const store = configureStore({
   reducer: {
     product: productSlice,
     category: categorySlice,
-    cart: cartSlice,
+    cart: cart,
     searchHistory: searchHistory,
   },
   middleware: (getDefaultMiddleware) =>

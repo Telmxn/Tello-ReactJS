@@ -7,25 +7,12 @@ const createCart = async ({ submit = false }) => {
     const { data } = await instance.get(`carts`, {
       headers: { "X-Authorization": API_KEY },
     });
-    if (submit) {
-      localStorage.setItem("submitCartId", data.id);
-    } else {
-      localStorage.setItem("cartId", data.id);
-    }
-    return data.id;
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
-const fetchCart = async ({ id }) => {
-  try {
-    if (id != undefined) {
-      const { data } = await instance.get(`carts/${id}`, {
-        headers: { "X-Authorization": API_KEY },
-      });
-      return data;
-    }
+    // if (submit) {
+    //   localStorage.setItem("submitCartId", data.id);
+    // } else {
+    //   localStorage.setItem("cartId", data.id);
+    // }
+    return data;
   } catch (error) {
     throw new Error(error);
   }
@@ -49,6 +36,25 @@ const addToCart = async ({ cartId, productId, quantity, options }) => {
     throw new Error(error);
   }
 };
+
+// const addToCartVariant = async ({ cartId, productId, quantity, variant }) => {
+//   try {
+//     const datab = {
+//       id: productId,
+//       quantity: quantity,
+//       variant_id: variant,
+//     };
+//     const { data } = await instance.post(`carts/${cartId}`, datab, {
+//       headers: {
+//         "X-Authorization": API_KEY,
+//         "Content-Type": "application/json",
+//       },
+//     });
+//     return data;
+//   } catch (error) {
+//     throw new Error(error);
+//   }
+// };
 
 const updateItemInCart = async ({ cartId, itemId, quantity }) => {
   try {
@@ -85,10 +91,25 @@ const removeItemFromCart = async ({ cartId, itemId }) => {
   }
 };
 
+const removeItemsFromCart = async ({ cartId }) => {
+  try {
+    const { data } = await instance.delete(`carts/${cartId}/items`, {
+      headers: {
+        "X-Authorization": API_KEY,
+        "Content-Type": "application/json",
+      },
+    });
+    return data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 export {
   createCart,
-  fetchCart,
   addToCart,
+  // addToCartVariant,
   updateItemInCart,
   removeItemFromCart,
+  removeItemsFromCart,
 };

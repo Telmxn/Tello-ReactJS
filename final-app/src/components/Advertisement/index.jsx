@@ -8,7 +8,6 @@ const Advertisement = ({
   message,
   price,
   loanPrice,
-  link,
   image,
   styleEx,
 }) => {
@@ -42,7 +41,7 @@ const Advertisement = ({
             <span className={style.azn}>AZN</span>-dən<sub>*</sub>
           </p>
         )}
-        <Link to={link} className={style.buyButton}>
+        <Link to={"/products"} className={style.buyButton}>
           İndi alın
         </Link>
       </div>

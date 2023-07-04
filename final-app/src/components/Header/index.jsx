@@ -6,32 +6,14 @@ import heartIcon from "../../assets/images/heart.svg";
 import shoppingCartIcon from "../../assets/images/shopping-cart.svg";
 import Menu from "../Menu";
 import Search from "../Search";
-import { memo, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getCart } from "../../store/actions/cartThunk";
-import { createCart } from "../../commerce/cart";
+import { useRef } from "react";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const { cart } = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
 
   const searchRef = useRef();
-  useEffect(() => {
-    const cartId = localStorage.getItem("cartId");
-    let ready = false;
-    if (cartId == null) {
-      createCart({ submit: false }).then(() => (ready = true));
-      if (ready == true) {
-        dispatch(getCart({ id: cartId }));
-      }
-    } else {
-      dispatch(getCart({ id: cartId }));
-    }
-    const submitCartId = localStorage.getItem("submitCartId");
-    if (submitCartId == null) {
-      createCart({ submit: true });
-    }
-  }, [cart]);
+
   return (
     <header>
       <Menu searchRef={searchRef} />
@@ -55,4 +37,4 @@ const Header = () => {
   );
 };
 
-export default memo(Header);
+export default Header;

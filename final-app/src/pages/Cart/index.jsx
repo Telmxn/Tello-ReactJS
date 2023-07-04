@@ -3,27 +3,30 @@ import shoppingCart from "../../assets/images/gray-shopping-cart.svg";
 import { Link } from "react-router-dom";
 import PriceContainer from "../../components/PriceContainer";
 import CartProduct from "../../components/CartProduct";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getCart } from "../../store/actions/cartThunk";
 import LoadingScreen from "../../components/LoadingScreen";
 import { ToastContainer } from "react-toastify";
 
 const Cart = () => {
   const { cart } = useSelector((state) => state.cart);
 
-  const dispatch = useDispatch();
+  useEffect(() => {}, []);
 
   useEffect(() => {
-    const cartId = localStorage.getItem("cartId");
-    dispatch(getCart(cartId));
+    // if (cart?.status == "fulfilled") {
+    //   if (localStorage.getItem("checkedArr") == null) {
+    //     const checked = cart?.cart?.line_items?.reduce((res, item) => {
+    //       return [...res, { [item.id]: false }];
+    //     }, []);
+    //     localStorage.setItem("checkedArr", JSON.stringify(checked));
+    //   }
+    // }
   }, []);
 
-  if (cart?.id == undefined) {
+  if (cart?.loading == "loading") {
     return <LoadingScreen />;
   }
-
-  console.log(cart);
 
   return (
     <div className={style.cart}>
@@ -40,7 +43,7 @@ const Cart = () => {
         theme="light"
       />
       <h2>Səbət ({cart?.total_items} məhsul)</h2>
-      {cart?.total_items == 0 ? (
+      {cart?.cart?.total_items == 0 ? (
         <div className={style.emptyCart}>
           <img src={shoppingCart} alt="Shopping Cart" />
           <p>Səbətiniz halhazırda boşdur</p>

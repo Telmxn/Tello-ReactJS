@@ -27,6 +27,7 @@ const ProductDetail = () => {
   const [isComments, setIsComments] = useState(true);
 
   const { singleProduct } = useSelector((state) => state.product);
+  const { cart } = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
 
@@ -118,12 +119,10 @@ const ProductDetail = () => {
       ).id;
       options[storagegroupId] = selectedStorage;
     }
-
-    let cartId = localStorage.getItem("cartId");
     toast.promise(
       dispatch(
         addItemToCart({
-          cartId: cartId,
+          cartId: cart.id,
           productId: singleProduct.product.id,
           quantity: count,
           options: options,

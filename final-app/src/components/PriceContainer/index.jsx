@@ -1,8 +1,17 @@
 import style from "./priceContainer.module.css";
 import manat from "../../assets/images/blackazn.svg";
 import redManat from "../../assets/images/redazn.svg";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const PriceContainer = () => {
+  const { cart } = useSelector((state) => state.cart);
+
+  useEffect(() => {
+    // const submitCartId = localStorage.getItem("submitCartId");
+    // dispatch(getSubmitCart({ id: submitCartId }));
+  }, [cart.cart]);
+
   return (
     <div className={style.priceContainer}>
       <h2>Ümumi</h2>
@@ -10,7 +19,7 @@ const PriceContainer = () => {
         <li>
           <p>Məbləğ</p>
           <p className={style.price}>
-            0.00 <img src={manat} alt="Manat" />
+            {cart?.subtotal?.formatted} <img src={manat} alt="Manat" />
           </p>
         </li>
         <li>
@@ -35,7 +44,7 @@ const PriceContainer = () => {
         <li>
           <p>Cəmi</p>
           <p className={style.price}>
-            0.00 <img src={redManat} alt="Manat" />
+            {cart?.subtotal?.formatted} <img src={redManat} alt="Manat" />
           </p>
         </li>
       </ul>

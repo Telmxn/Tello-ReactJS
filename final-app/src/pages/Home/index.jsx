@@ -77,7 +77,6 @@ const Home = () => {
           message="iPhone 11. Rəngli. Güclü. Əsl sizə lazım olan."
           price="1519"
           loanPrice="127"
-          link="#"
           image={iPhone11}
         />
         <Advertisement
@@ -86,7 +85,6 @@ const Home = () => {
           message="Əşyalarınızı tapmağın super asan yolu."
           price="79"
           name="AirTag"
-          link="#"
           image={iPhoneAirTag}
         />
       </div>

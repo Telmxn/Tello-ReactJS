@@ -7,8 +7,18 @@ import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
 import Error from "./pages/Error";
 import Cart from "./pages/Cart";
+import { useDispatch, useSelector } from "react-redux";
+import { makeCart } from "./store/actions/cartThunk";
 
 function App() {
+  const { cart } = useSelector((state) => state.cart);
+
+  const dispatch = useDispatch();
+
+  if (Object.values(cart).length === 0) {
+    dispatch(makeCart({ submit: false }));
+  }
+
   return (
     <div className="App">
       <Header />

@@ -1,18 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
-  fetchCart,
   addToCart,
   updateItemInCart,
   removeItemFromCart,
+  removeItemsFromCart,
+  createCart,
+  // addToCartVariant,
 } from "../../commerce/cart";
 
-export const getCart = createAsyncThunk(
-  "cart/getCart",
-  async ({ id }, thunkAPI) => {
+export const makeCart = createAsyncThunk(
+  "cart/makeCart",
+  async ({ submit }, thunkAPI) => {
     try {
-      const data = await fetchCart({
-        id,
-      });
+      const data = await createCart({ submit });
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue("Error bas verdi");
@@ -37,6 +37,23 @@ export const addItemToCart = createAsyncThunk(
   }
 );
 
+// export const addItemToCartVariant = createAsyncThunk(
+//   "cart/addItemToCartVariant",
+//   async ({ cartId, productId, quantity, variant }, thunkAPI) => {
+//     try {
+//       const data = await addToCartVariant({
+//         cartId,
+//         productId,
+//         quantity,
+//         variant,
+//       });
+//       return data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue("Error bas verdi");
+//     }
+//   }
+// );
+
 export const updateCartItem = createAsyncThunk(
   "cart/updateCartItem",
   async ({ cartId, itemId, quantity }, thunkAPI) => {
@@ -60,6 +77,20 @@ export const deleteItemFromCart = createAsyncThunk(
       const data = await removeItemFromCart({
         cartId,
         itemId,
+      });
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue("Error bas verdi");
+    }
+  }
+);
+
+export const emptyCart = createAsyncThunk(
+  "cart/emptyCart",
+  async ({ cartId }, thunkAPI) => {
+    try {
+      const data = await removeItemsFromCart({
+        cartId,
       });
       return data;
     } catch (error) {
