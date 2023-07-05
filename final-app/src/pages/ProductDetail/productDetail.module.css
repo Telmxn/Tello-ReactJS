@@ -257,6 +257,16 @@ form h2 {
   font-size: 14px;
   line-height: 20px;
 }
+.rateForm .input input,
+.rateForm .input textarea,
+.rateForm .input select {
+  padding: 14px 16px;
+  background: var(--gray-6, #f2f2f2);
+  border-radius: 8px;
+  border: none;
+  margin-top: 8px;
+  outline: none;
+}
 .rateForm .input select {
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -267,16 +277,6 @@ form h2 {
   background-size: 12px;
   background-position-x: 97%;
   color: var(--gray-3, #828282);
-}
-.rateForm .input input,
-textarea,
-select {
-  padding: 14px 16px;
-  background: var(--gray-6, #f2f2f2);
-  border-radius: 8px;
-  border: none;
-  margin-top: 8px;
-  outline: none;
 }
 .rateForm .input textarea {
   resize: none;

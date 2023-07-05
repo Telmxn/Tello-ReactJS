@@ -98,6 +98,9 @@
     width: 100%;
     max-width: 450px;
   }
+  .login .leftpart .linkTo {
+    display: none;
+  }
   .login .rightPart .linkTo a {
     color: var(--blue-link, #2d9cdb);
     font-weight: 500;

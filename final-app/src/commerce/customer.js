@@ -37,4 +37,25 @@ const exchangeToken = async ({ token }) => {
   }
 };
 
-export { getToken, exchangeToken };
+const createCustomer = async ({ email, phone, firstname, lastname }) => {
+  try {
+    const body = {
+      email: email,
+      phone: phone,
+      firstname: firstname,
+      lastname: lastname,
+    };
+    console.log(body);
+    const { data } = await instance.post(`customers`, body, {
+      headers: {
+        "X-Authorization": API_KEY,
+        "Content-Type": "application/json",
+      },
+    });
+    return data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export { getToken, exchangeToken, createCustomer };

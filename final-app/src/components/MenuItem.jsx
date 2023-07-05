@@ -39,7 +39,12 @@ const MenuItem = ({ name, link, dropdownCategory, style }) => {
       }`}
       onClick={() => setIsOpen((prev) => !prev)}
     >
-      <NavLink to={link}>{name}</NavLink>
+      <NavLink
+        to={link}
+        className={({ isActive }) => (isActive ? style.active : "")}
+      >
+        {name}
+      </NavLink>
       {dropdownCategory && (
         <div className={`${isOpen ? style.open : ""} ${style.dropdownMenu}`}>
           <div className={style.leftPart}>

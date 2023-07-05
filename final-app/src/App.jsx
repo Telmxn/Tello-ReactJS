@@ -1,8 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Header from "./components/Header";
 import Home from "./pages/Home";
-import Footer from "./components/Footer";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
 import Error from "./pages/Error";
@@ -12,10 +10,10 @@ import { makeCart } from "./store/actions/cartThunk";
 import Dashboard from "./pages/Dashboard";
 import Layout from "./components/Layout";
 import Login from "./pages/Login";
-import { useState } from "react";
 import LoginConfirm from "./pages/LoginConfirm";
 import AuthLayout from "./components/AuthLayout";
 import RestrictedLayout from "./components/RestrictedLayout";
+import Register from "./pages/Register";
 
 function App() {
   const { cart } = useSelector((state) => state.cart);
@@ -41,6 +39,7 @@ function App() {
         </Route>
         <Route element={<RestrictedLayout />}>
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/login/confirm" element={<LoginConfirm />} />
           <Route path="/confirm/:token" element={<Home />} />
         </Route>

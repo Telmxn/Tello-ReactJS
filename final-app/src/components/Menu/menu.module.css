@@ -80,6 +80,9 @@
   color: #303030;
   line-height: 28px;
 }
+.menu > nav > ul > li > a.active {
+  color: var(--main-default);
+}
 .menu .dropdown {
   position: relative;
 }
