@@ -7,22 +7,29 @@ import Error from "./pages/Error";
 import Cart from "./pages/Cart";
 import { useDispatch, useSelector } from "react-redux";
 import { makeCart } from "./store/actions/cartThunk";
-import Dashboard from "./pages/Dashboard";
 import Layout from "./components/Layout";
 import Login from "./pages/Login";
 import LoginConfirm from "./pages/LoginConfirm";
 import AuthLayout from "./components/AuthLayout";
 import RestrictedLayout from "./components/RestrictedLayout";
 import Register from "./pages/Register";
+import Orders from "./pages/Orders";
+import Profile from "./pages/Profile";
+import { useEffect } from "react";
+import { getCustomer } from "./store/actions/customerThunk";
 
 function App() {
   const { cart } = useSelector((state) => state.cart);
-
+  const { customerId } = useSelector((state) => state.customer);
   const dispatch = useDispatch();
 
   if (Object.values(cart).length === 0) {
     dispatch(makeCart({ submit: false }));
   }
+
+  useEffect(() => {
+    dispatch(getCustomer({ customerId: customerId }));
+  }, [customerId]);
 
   return (
     <div className="App">
@@ -44,7 +51,8 @@ function App() {
           <Route path="/confirm/:token" element={<Home />} />
         </Route>
         <Route element={<AuthLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/user/orders" element={<Orders />} />
+          <Route path="/user/profile" element={<Profile />} />
         </Route>
       </Routes>
     </div>

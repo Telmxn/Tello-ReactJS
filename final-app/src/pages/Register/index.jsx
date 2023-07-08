@@ -53,11 +53,9 @@ const Register = () => {
                 },
               })}
             />
-            {errors.NameSurname && (
-              <span className={style.errorMessage}>
-                {errors.NameSurname.message}
-              </span>
-            )}
+            <span className={errors.NameSurname && style.errorMessage}>
+              {errors?.NameSurname?.message}
+            </span>
           </div>
           <div className={style.formGroup}>
             <label>E-mail</label>
@@ -66,16 +64,16 @@ const Register = () => {
               type="email"
               placeholder="nümunə@gmail.com"
               {...register("Email", {
-                required: "E-mail daxil edin.",
+                required: "E-mailinizi daxil edin.",
                 pattern: {
                   value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-                  message: "E-mail yanlışdır.",
+                  message: "E-mailiniz yanlışdır.",
                 },
               })}
             />
-            {errors.Email && (
-              <span className={style.errorMessage}>{errors.Email.message}</span>
-            )}
+            <span className={errors.Email && style.errorMessage}>
+              {errors?.Email?.message}
+            </span>
           </div>
           <div className={`${style.formGroup} ${style.phoneGroup}`}>
             <label>Mobil nömrə</label>
@@ -106,11 +104,9 @@ const Register = () => {
               <span className={style.checkmark}></span>
               <Link to={"#"}>İstifadəçi şərtləri</Link> ilə razıyam
             </label>
-            {errors.Agreed && (
-              <span className={style.errorMessage}>
-                {errors.Agreed?.message}
-              </span>
-            )}
+            <span className={errors.Agreed && style.errorMessage}>
+              {errors?.Agreed?.message}
+            </span>
           </div>
           <input type="submit" value="Qeydiyyat" />
         </form>

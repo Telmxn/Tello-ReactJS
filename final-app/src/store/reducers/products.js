@@ -9,17 +9,17 @@ import {
 const initialState = {
   selectedProducts: {
     products: [],
-    staus: "nothing",
+    status: "nothing",
     error: "",
   },
   searchedProducts: {
     products: [],
-    staus: "nothing",
+    status: "nothing",
     error: "",
   },
   pageProducts: {
     products: [],
-    staus: "nothing",
+    status: "nothing",
     error: "",
   },
   singleProduct: {

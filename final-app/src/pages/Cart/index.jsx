@@ -43,7 +43,7 @@ const Cart = () => {
         theme="light"
       />
       <h2>Səbət ({cart?.total_items} məhsul)</h2>
-      {cart?.cart?.total_items == 0 ? (
+      {cart?.total_items == 0 ? (
         <div className={style.emptyCart}>
           <img src={shoppingCart} alt="Shopping Cart" />
           <p>Səbətiniz halhazırda boşdur</p>

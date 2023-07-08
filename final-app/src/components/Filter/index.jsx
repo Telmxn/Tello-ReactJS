@@ -129,40 +129,6 @@ const Filter = ({ setCategories, setPriceAbove, setPriceBelow, setColors }) => {
                 }`}
               ></div>
             </div>
-            {/* <ul
-              className={`${style.buttons} ${
-                openContainers.type == true ? style.openContainer : ""
-              }`}
-            >
-              <li>
-                <label className={style.container}>
-                  <input type="checkbox" />
-                  <span className={style.checkmark}></span>
-                  
-                </label>
-              </li>
-              <li>
-                <label className={style.container}>
-                  <input type="checkbox" />
-                  <span className={style.checkmark}></span>
-                  Samsung
-                </label>
-              </li>
-              <li>
-                <label className={style.container}>
-                  <input type="checkbox" />
-                  <span className={style.checkmark}></span>
-                  Xiaomi
-                </label>
-              </li>
-              <li>
-                <label className={style.container}>
-                  <input type="checkbox" />
-                  <span className={style.checkmark}></span>
-                  Honor
-                </label>
-              </li>
-            </ul> */}
           </div>
           <div className={style.filterBy}>
             <div
@@ -178,40 +144,6 @@ const Filter = ({ setCategories, setPriceAbove, setPriceBelow, setColors }) => {
                 }`}
               ></div>
             </div>
-            {/* <ul
-              className={`${style.buttons} ${
-                openContainers.category == true ? style.openContainer : ""
-              }`}
-            >
-              <li>
-                <label className={style.container}>
-                  <input type="checkbox" />
-                  <span className={style.checkmark}></span>
-                  Apple
-                </label>
-              </li>
-              <li>
-                <label className={style.container}>
-                  <input type="checkbox" />
-                  <span className={style.checkmark}></span>
-                  Samsung
-                </label>
-              </li>
-              <li>
-                <label className={style.container}>
-                  <input type="checkbox" />
-                  <span className={style.checkmark}></span>
-                  Xiaomi
-                </label>
-              </li>
-              <li>
-                <label className={style.container}>
-                  <input type="checkbox" />
-                  <span className={style.checkmark}></span>
-                  Honor
-                </label>
-              </li>
-            </ul> */}
           </div>
           <div className={style.filterBy}>
             <div

@@ -20,6 +20,32 @@ const getToken = async ({ email }) => {
   }
 };
 
+const fetchOrders = async ({ customerId }) => {
+  try {
+    const { data } = await instance.get(`customers/${customerId}/orders`, {
+      headers: {
+        "X-Authorization": API_KEY,
+      },
+    });
+    return data.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const fetchCustomer = async ({ customerId }) => {
+  try {
+    const { data } = await instance.get(`customers/${customerId}`, {
+      headers: {
+        "X-Authorization": API_KEY,
+      },
+    });
+    return data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 const exchangeToken = async ({ token }) => {
   try {
     const body = {
@@ -45,7 +71,6 @@ const createCustomer = async ({ email, phone, firstname, lastname }) => {
       firstname: firstname,
       lastname: lastname,
     };
-    console.log(body);
     const { data } = await instance.post(`customers`, body, {
       headers: {
         "X-Authorization": API_KEY,
@@ -58,4 +83,37 @@ const createCustomer = async ({ email, phone, firstname, lastname }) => {
   }
 };
 
-export { getToken, exchangeToken, createCustomer };
+const updateCustomer = async ({
+  customerId,
+  email,
+  phone,
+  firstname,
+  lastname,
+}) => {
+  try {
+    const body = {
+      email: email,
+      phone: phone,
+      firstname: firstname,
+      lastname: lastname,
+    };
+    const { data } = await instance.put(`customers/${customerId}`, body, {
+      headers: {
+        "X-Authorization": API_KEY,
+        "Content-Type": "application/json",
+      },
+    });
+    return data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export {
+  getToken,
+  fetchOrders,
+  fetchCustomer,
+  exchangeToken,
+  createCustomer,
+  updateCustomer,
+};

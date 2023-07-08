@@ -63,6 +63,13 @@
 .register .leftpart .formGroup input::placeholder {
   color: var(--gray-3, #828282);
 }
+.register .leftpart .formGroup span {
+  max-height: 0px;
+}
+.errorMessage {
+  max-height: 30px;
+  color: #bf1650;
+}
 .errorMessage {
   color: #bf1650;
 }

@@ -21,7 +21,7 @@ const Header = () => {
         <img src={logo} className={style.logo} />
       </Link>
       <div className={style.buttons}>
-        <Link to={"/dashboard"}>
+        <Link to={"/user/profile"}>
           <img src={personIcon} alt="Person" />
         </Link>
         <Link to={"#"}>
