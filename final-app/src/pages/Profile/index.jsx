@@ -5,6 +5,7 @@ import editIcon from "../../assets/images/profil-edit.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { updateCustomerInfo } from "../../store/actions/customerThunk";
+import { ToastContainer } from "react-toastify";
 
 const Profile = () => {
   const {
@@ -19,10 +20,12 @@ const Profile = () => {
 
   const dispatch = useDispatch();
 
+  const [editing, setEditing] = useState(false);
+
   const [name, setName] = useState(customer.firstname);
   const [lastname, setLastname] = useState(customer.lastname);
   const [email, setEmail] = useState(customer.email);
-  const [phone, setPhone] = useState(customer.phone.slice(4));
+  const [phone, setPhone] = useState(customer.phone?.slice(4));
   const prefixRef = useRef();
 
   useEffect(() => {
@@ -43,6 +46,18 @@ const Profile = () => {
 
   return (
     <div className={style.profile}>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <h2>Şəxsi məlumatlar</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={style.formGroup}>
@@ -59,6 +74,7 @@ const Profile = () => {
               },
               onChange: (e) => {
                 setName(e.target.value);
+                setEditing(true);
               },
             })}
           />
@@ -80,6 +96,7 @@ const Profile = () => {
               },
               onChange: (e) => {
                 setLastname(e.target.value);
+                setEditing(true);
               },
             })}
           />
@@ -102,6 +119,7 @@ const Profile = () => {
               },
               onChange: (e) => {
                 setEmail(e.target.value);
+                setEditing(true);
               },
             })}
           />
@@ -128,6 +146,7 @@ const Profile = () => {
             {...register("phone", {
               onChange: (e) => {
                 setPhone(e.target.value);
+                setEditing(true);
               },
             })}
           />
@@ -135,7 +154,7 @@ const Profile = () => {
         <span className={updateStatus == "error" ? style.errorMessage : ""}>
           Bu e-maildən artıq istifadə olunub.
         </span>
-        <button>
+        <button disabled={!editing}>
           <img src={editIcon} alt="Edit" /> Məlumatları yenilə
         </button>
       </form>

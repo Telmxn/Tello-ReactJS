@@ -1,4 +1,5 @@
 import { instance } from ".";
+import { toast } from "react-toastify";
 
 const API_KEY = import.meta.env.VITE_CHEC_SECRET_KEY;
 
@@ -103,8 +104,10 @@ const updateCustomer = async ({
         "Content-Type": "application/json",
       },
     });
+    toast.success("İstifadəçinin məlumatları yeniləndi.");
     return data;
   } catch (error) {
+    toast.error("İstifadəçinin məlumatları yenilənmədi.");
     throw new Error(error);
   }
 };

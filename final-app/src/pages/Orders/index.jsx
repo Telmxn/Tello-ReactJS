@@ -9,12 +9,10 @@ const Orders = () => {
   const { orders, customerId, status } = useSelector((state) => state.customer);
 
   const dispatch = useDispatch();
-  console.log(customerId);
+
   useEffect(() => {
     dispatch(getOrders({ customerId: customerId }));
   }, []);
-
-  console.log(orders);
 
   if (status == "loading") {
     return <LoadingScreen />;
