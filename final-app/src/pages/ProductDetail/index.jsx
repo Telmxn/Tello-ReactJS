@@ -187,7 +187,7 @@ const ProductDetail = () => {
               <img src={greenAzn} className={style.greenAzn} alt="AZN" />
               <img src={redAzn} className={style.redAzn} alt="AZN" />
             </p>
-            <button className={style.cart}>
+            <button className={style.cart} onClick={addToBasket}>
               <img src={cartIcon} alt="Cart" />
               Səbətə at
             </button>

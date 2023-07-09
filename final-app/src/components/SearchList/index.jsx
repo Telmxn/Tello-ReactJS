@@ -68,7 +68,7 @@ const SearchList = ({ isSearching, search, handleForm }) => {
           <div className={style.searches}>
             <div className={style.topPart}>
               <h3>Nəticələr</h3>
-              <button className={style.clear}>Təmizlə</button>
+              {/* <button className={style.clear}>Təmizlə</button> */}
             </div>
             <div className={style.result}>
               {searchedProducts?.status == "loading" ? (
@@ -86,6 +86,7 @@ const SearchList = ({ isSearching, search, handleForm }) => {
                       image={product.image.url}
                       title={product.name}
                       price={product.price.raw}
+                      id={product.id}
                       key={product.id}
                     />
                   );
