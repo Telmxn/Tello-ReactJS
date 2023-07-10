@@ -33,7 +33,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     dispatch(getProduct({ id: params.id }));
-  }, []);
+  }, [params.id]);
 
   useEffect(() => {
     if (singleProduct.product.variant_groups?.length > 1) {

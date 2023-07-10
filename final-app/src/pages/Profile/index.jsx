@@ -16,7 +16,7 @@ const Profile = () => {
     mode: "onChange",
   });
 
-  const { customer, updateStatus } = useSelector((state) => state.customer);
+  const { customer } = useSelector((state) => state.customer);
 
   const dispatch = useDispatch();
 
@@ -29,7 +29,8 @@ const Profile = () => {
   const prefixRef = useRef();
 
   useEffect(() => {
-    prefixRef.current.value = customer.phone.split(" ")[0];
+    window.scrollTo(0, 0);
+    prefixRef.current.value = customer?.phone?.split(" ")[0];
   }, [customer]);
   const onSubmit = (data) => {
     const phoneNumber = prefixRef.current.value + " " + data.phone;
@@ -151,9 +152,9 @@ const Profile = () => {
             })}
           />
         </div>
-        <span className={updateStatus == "error" ? style.errorMessage : ""}>
+        {/* <span className={updateStatus == "error" ? style.errorMessage : ""}>
           Bu e-maildən artıq istifadə olunub.
-        </span>
+        </span> */}
         <button disabled={!editing}>
           <img src={editIcon} alt="Edit" /> Məlumatları yenilə
         </button>

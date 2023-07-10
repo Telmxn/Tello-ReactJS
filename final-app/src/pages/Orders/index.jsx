@@ -11,6 +11,7 @@ const Orders = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(getOrders({ customerId: customerId }));
   }, []);
 

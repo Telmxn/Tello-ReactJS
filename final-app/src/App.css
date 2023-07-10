@@ -19,7 +19,9 @@
   --menuBackground: #faf9f9;
   --text-color-accent-link: #36f;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 html,
 body,
 div,

@@ -66,6 +66,9 @@
 .register .leftpart .formGroup span {
   max-height: 0px;
 }
+.register .leftpart .formGroup.agreedGroup span {
+  max-height: unset;
+}
 .errorMessage {
   max-height: 30px;
   color: #bf1650;

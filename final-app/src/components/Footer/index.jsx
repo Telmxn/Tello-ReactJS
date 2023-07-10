@@ -35,16 +35,16 @@ const Footer = () => {
           <h3>Menu</h3>
           <ul>
             <li>
-              <Link to={"#"}>Yeni</Link>
+              <Link to={"/products/new"}>Yeni</Link>
             </li>
             <li>
-              <Link to={"#"}>Endirimlər</Link>
+              <Link to={"/products/discounts"}>Endirimlər</Link>
             </li>
             <li>
-              <Link to={"#"}>Aksessuarlar</Link>
+              <Link to={"/products/accessories"}>Aksessuarlar</Link>
             </li>
             <li>
-              <Link to={"#"}>Bütün brendlər</Link>
+              <Link to={"/products/"}>Bütün brendlər</Link>
             </li>
           </ul>
         </div>

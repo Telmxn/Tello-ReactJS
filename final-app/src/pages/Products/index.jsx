@@ -25,6 +25,7 @@ const Products = () => {
 
   let sorting = sortBy?.split(".");
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(
       getPageProducts({
         sortBy: sorting != undefined ? sorting[0] : null,

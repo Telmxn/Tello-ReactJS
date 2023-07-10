@@ -14,6 +14,7 @@ const Cart = () => {
   useEffect(() => {}, []);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     // if (cart?.status == "fulfilled") {
     //   if (localStorage.getItem("checkedArr") == null) {
     //     const checked = cart?.cart?.line_items?.reduce((res, item) => {

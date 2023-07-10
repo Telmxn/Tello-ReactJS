@@ -67,6 +67,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (params.token != undefined) {
       toast.promise(dispatch(createJWT({ token: params.token })), {
         pending: "İstifadəçi hesaba daxil olur.",
